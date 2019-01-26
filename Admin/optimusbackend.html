@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-compatible" content="IE=edge"/>
+    <meta http-equiv="content-Type" content="text/html;charset=utf-8"/>
+    <meta http-equiv="content-style-Type" content="text/css"/>
+    <meta name="author" content=""/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+    <title>Denari Gadgets Backend</title>
+
+    <link rel="icon" type="image/png" href="">
+
+        
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+         <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+		 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+            <!--custom css-->
+    <link type="text/css" href="backendcss/pages.css" rel="stylesheet">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94013900-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94013900-2');
+</script>
+  
+</head>
+<body>
+	<div class="jumbotron-fluid fixed-top">
+
+		<div class="float-right">
+                <div class="dropdown">
+                    <span class="fa fa-user-circle-o dropdown-toggle" data-toggle="dropdown"></span>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul>
+                            <li class="dropdown-header"><b>Your account Info</b></li>
+							<li class="dropdown-item"><b>Id</b><i id="id"></i></li>
+							<li class="dropdown-item"><b>Name:</b><i id="name"></i></li>
+							<li class="dropdown-item"><b>UserName:</b><i id="username"></i></li>
+							<li class="dropdown-item"><b>Email:</b><i id="email"></i></li>
+                            <li class="dropdown-item"><b>PhoneNumber:</b><i id="PNum"></i></li>
+                            <li class="dropdown-item"><b>UId</b><i id="uId"></i></li>
+                            <li class="dropdown-item"><b>Role</b><i id="role"></i></li>
+                            <li class="dropdown-item"><b>OutletId</b><i id="Oid"></i></li>
+							<hr>
+							<li class="dropdown-item" id="logout"><span class="fa fa-sign-out"></span>Log Out</li>
+                        </ul>
+                    </div>
+                </div>
+
+        </div>
+            
+		<div class="float-left">
+                <div class="dropdown">
+                    <span class="fa fa-align-justify dropdown-toggle" data-toggle="dropdown"></span>
+                    <div class="dropdown-menu dropdown-menu-left">
+                        <ul>
+							<li class="dropdown-header"><b>Navigation</b></li>
+							<li class="dropdown-item"><a href="Gadgets.html">Gadgets</a></li>
+							<li class="dropdown-item"><a href="Alcohols.html">Alcohol</a></li>
+                            <li class="dropdown-item"><a href="Vouchers.html">Vouchers</a></li>
+                              </ul>
+                    </div>
+                </div>
+
+          </div>
+            
+            <h5><a href="optimusbackend.html">Dashboard</a></h5>
+            
+            
+</div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    
+                </div>
+            </div>
+        </div>
+		
+
+    <!--Error modal-->
+    <div class="modal fade" id="ErrorM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center bg-danger">
+                    <h4 class="modal-title w-100 font-weight-bold text-dark">Error!</h4>
+                </div>
+                <div class="modal-body mx-3">
+                    <div id="errorMSG">
+
+                    </div>
+                    <button type="button" class="btn btn-outline-danger waves-effect ml-auto float-right" data-dismiss="modal">ok</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Error-->
+
+
+    <!--Success modal-->
+    <div class="modal fade" id="SuccessM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center bg-success">
+                    <h4 class="modal-title w-100 font-weight-bold text-dark">Success</h4>
+                </div>
+                <div class="modal-body mx-3">
+                    <div id="successMSG">
+
+                    </div>
+                    <button type="button" class="btn btn-outline-success waves-effect ml-auto float-right" data-dismiss="modal">ok</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--success-->
+		
+		<!--external js-->
+	<script src="backendjs/BEjs.js"></script>
+    </body>
+</html>

@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-compatible" content="IE=edge"/>
+    <meta http-equiv="content-Type" content="text/html;charset=utf-8"/>
+    <meta http-equiv="content-style-Type" content="text/css"/>
+    <meta name="author" content=""/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+    <title>Denari Gadgets</title>
+
+    <link rel="icon" type="image/png" href="">
+
+        
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+    <!--Navbar-->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark mdb-color white-text scrolling-navbar">
+        <div class="container">
+            <!--Brand-->
+            <a class="navbar-brand waves-effect" href="">
+                <strong class="blue-text">Denari Gadgets Admin</strong>
+            </a>
+
+            
+        </div>
+    </nav>
+    <!--Navbar-->
+
+    <!--Main layout-->
+    <main class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="md-form">
+                                <input type="email" id="Uname" class="form-control">
+                                <label for="email" class="">UserName</label>
+                            </div>
+                            <div class="md-form">
+                                <input type="password" id="Pword" class="form-control validate" />
+                                <label for="password">Password</label>
+                            </div>
+                            <button type="button" id="submitBE" class="btn btn-success btn-md btn-block"><h4>Login <span class="fa fa-key fa-lg"></span></h4></button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+    </main>
+
+    <!--Error modal-->
+    <div class="modal fade" id="ErrorM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center bg-danger">
+                    <h4 class="modal-title w-100 font-weight-bold text-dark">Error!</h4>
+                </div>
+                <div class="modal-body mx-3">
+                    <div id="errorMSG">
+
+                    </div>
+                    <button type="button" class="btn btn-outline-danger waves-effect ml-auto float-right" data-dismiss="modal">ok</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Error-->
+
+
+    <!--Success modal-->
+    <div class="modal fade" id="SuccessM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center bg-success">
+                    <h4 class="modal-title w-100 font-weight-bold text-dark">Success</h4>
+                </div>
+                <div class="modal-body mx-3">
+                    <div id="successMSG">
+
+                    </div>
+                    <button type="button" class="btn btn-outline-success waves-effect ml-auto float-right" data-dismiss="modal">ok</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--success-->
+			
+    <!-- SCRIPTS -->
+    
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Initializations -->
+    <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+    </script>
+    <!--custom javascript-->
+    <script type="text/javascript" src="backendjs/BELjs.js"></script>
+</body>
+</html>

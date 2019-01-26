@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="betting ,bet, Alcohols, liquor, bid, bidder, e-commerce ,shop, Denari, shopping, market" />
+
+
+    <title>Alcohol Product Page::bidding site for Alcohol.</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.min.css" rel="stylesheet">
+    
+    <style type="text/css">
+        .modal{
+            z-index:1080;
+        }
+    </style>
+
+   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94013900-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94013900-2');
+</script>
+
+
+</head>
+<body>
+    <!--Navbar-->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark mdb-color white-text scrolling-navbar">
+        <div class="container">
+            <!--Brand-->
+            <a class="navbar-brand waves-effect" href="">
+                <strong class="blue-text">Denari Alcohol</strong>
+            </a>
+
+            <!--collapse-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!--Links-->
+            <div class="collapse navbar-collapse" id="navbarContent">
+
+                <!--Left-->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="ourStory.html" target="_self">Our Story</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" id="LiveA" ><span class="fa fa-shopping-cart"></span> Live Auctions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" id="ClosedA"><span class="fa fa-handshake-o"></span> Closed Auctions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="howTo.html" target="_self">How to Bid.</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link waves-effect" href="faqs.html" target="_self">FAQ's</a>
+                        </li>
+                </ul>
+
+                <!--Right Contents-->
+                <ul class="navbar-nav nav-flex-icons">
+                    <li class="nav-item">
+                        <a tabindex="0" class="btn btn-sm" id="pop" data-toggle="popover" data-trigger="focus" data-html="true" data-placement="bottom" ><b class="fa fa-briefcase"> DWallet</b></a>
+                    </li>
+                    <li class="nav-item">
+                       <a id="logout" class="btn btn-sm"><span class="fa fa-sign-out-alt"></span> Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Navbar-->
+
+    <!--For the contents-->
+    <div class="container pt-5">
+        <!--category navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark secondary-color mt-5 mb-5">
+
+                <!--Navbar brand-->
+                <span class="navbar-brand">Categories:</span>
+
+                <!--Collapse button-->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#CategoryNav" aria-controls="CategoryNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!--Collapsible content-->
+                <div class="collapse navbar-collapse" id="CategoryNav">
+
+                    <!--Links-->
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href=""><span class="fa fa-beer"></span> Denari Alcohol
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/"><span class="fa fa-"></span> Denari Gadgets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Vouchers.html"><span class="fa fa-gift"></span> Denari Vouchers</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </nav>
+            <!--Navbar-->
+        <div class="row" id="content" style="display:flex;">
+			<i class="fa fa-spinner fa-spin fa-5x fa-fw"></i>
+        </div>
+    </div>
+    <!--contents-->
+
+    <!--contact us-->
+    <div class="container fixed-bottom ">
+        <div class="row">
+            <div class="col">
+
+                <button class="btn btn-primary float-right  mb-4 " type="button" data-toggle="modal" data-target="#mail"><i class="fa fa-envelope fa-inverse"></i></button>
+
+            </div>
+        </div>
+    </div>
+    <!--contact us-->
+
+    
+
+
+        
+        <!--modal for Bid Ranking-->
+        <div class="modal fade" id="BidRank" tabindex="-1" role="dialog" aria-labelledby="BidRank" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body mx-3">
+                        <div id="bidRankContent">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary float-left waves-effect" id="MybidR">My Bid Rank</button>
+                        <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Bid Ranking-->
+        <!--My bid Rank-->
+        <div class="modal fade" id="MyRank" tabindex="-1" role="dialog" aria-labelledby="MyRank" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center warning-color-dark">
+                        <h4 class="modal-title w-100 font-weight-bold text-dark">My Bid Rank</h4>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <p class="text-dark"><b>userName: </b> <i id="Runame"></i></p>
+						<p class="text-dark"><b>Bids Placed: </b> <i id="Rtb"></i></p>
+						<p class="text-dark"><b>Position: </b> <i id="Rpos"></i></p>
+					  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary float-left waves-effect PBbtn" data-toggle="modal" data-target="#BPromote">Promote Bid</button>
+                        <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--My bid Rank-->
+        <!--Modal for Account user information-->
+    <div class="modal fade" id="AccountInfo" tabindex="-1" role="dialog" aria-labelledby="AccountInfo" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold text-dark">Account Info</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <div class=" mx-auto white text-center grey lighten-2">
+                            <img src="img/images.png" id="Ppic"class="rounded-circle img-fluid" height="150px" width="150px">
+                        </div>
+                        <hr>
+                        <div id="AccInfo" class="text-dark">
+                            <b>Name:</b> <i><span id='name'></span></i><br />
+                            <b>Nick Name:</b> <i><span id='nickname'></span></i><br />
+                            <b>User Name:</b> <i><span id='username'></span> </i> <br />
+                            <b>Email:</b> <i><span id='email'></span></i><br />
+                            <b>PhoneNumber:</b> <i><span id='PNum'></span></i><br />
+                            <b>ID Number:</b> <i><span id='idNum'></span></i><br />
+                            <b>Gender:</b> <i><span id='gen'></span></i><br />
+                            <b>Date Of Birth:</b> <i><span id='dob'></span></i><br />
+                            <b>Confimed Email:</b> <i><span id='CE'></span></i><br />
+                            <b>Confirm PhoneNumber:</b> <i><span id='CP'></span></i><br />
+                        </div>
+                        
+                        <button type="button" class="btn btn-outline-warning btn-sm waves-effect" data-toggle="modal" data-target="#Reginfor">Register Additional Information</button>
+                        <button type="button" class="btn btn-outline-default btn-sm waves-effect" data-toggle="modal" data-target="#UploadM">Upload Profile Pic</button>
+                        <button type="button" class="btn btn-outline-dark float-left btn-sm waves-effect" data-toggle="modal" data-target="#ChangeP">Change Password</button>
+                        <button type="button" class="btn btn-outline-dark float-right  btn-sm waves-effect" data-toggle="modal" data-target="#Getstatem">Get Statement</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Account user information-->
+        <!--modal for the get statement-->
+        <div class="modal fade" id="Getstatem" tabindex="-1" role="dialog" aria-labelledby="Getstatem" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold text-dark">Get Statement (From Date...To Date)</h4>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <div class="md-form pb-3">
+                            <i class="prefix"></i>
+                            <label for="Dob">From Date</label>
+                        </div>
+                        <div class="md-form mb-3">
+                            <i class="fa fa-calender prefix grey-text"></i>
+                            <input type="date" id="fromDate" class="form-control validate" />
+                            <label data-error="wrong" data-success="right" for="fromDate"></label>
+                        </div>
+                        <div class="md-form pb-3">
+                            <i class="prefix"></i>
+                            <label for="Dob">To Date</label>
+                        </div>
+                        <div class="md-form mb-5">
+                            <i class="fa fa-calender prefix grey-text"></i>
+                            <input type="date" id="EndDate" class="form-control validate" />
+                            <label data-error="wrong" data-success="right" for="EndDate"></label>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class="btn btn-default" id="Getstatembtn">Get Statement</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--get statement-->
+        <!--Upload dp modal-->
+    <div class="modal fade" id="UploadM" tabindex="-1" role="dialog" aria-labelledby="UploadM" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+    
+                    <div class="modal-body mx-3">
+                            <div class="md-form mb-3">
+                                    <i class=" prefix grey-text"></i>
+                                    <input type="file" id="UPpic" name="UPpic" accept="image/*" class="form-control">
+                                </div>
+                                <div id="holder"class="text-center"></div>
+                        
+                    </div>
+                    <div class="modal-footer d-flex">
+                            <button class="btn btn-default float-right btn-md" id="UdpBtn">Upload</button>
+                        </div>
+    
+                </div>
+            </div>
+        </div>
+        <!--Upload dp modal-->
+        <!--modal for change password-->
+        <div class="modal fade" id="ChangeP" tabindex="-1" role="dialog" aria-labelledby="ChangeP" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold text-dark">Change Password</h4>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <form>
+                            <div class="md-form mb-5">
+                                <i class="fa fa-lock prefix grey-text"></i>
+								<i class="fa fa-eye-slash  float-right mt-3 text-dark" id="OPV"></i>
+                                <input type="password" id="oldP" class="form-control validate" autocomplete="off"/>
+                                <label data-error="wrong" data-success="right" for="oldP">Old Password</label>
+                            </div>
+                            <div class="md-form mb-5">
+                                <i class="fa fa-calender prefix grey-text"></i>
+								<i class="fa fa-eye-slash  float-right mt-3 text-dark" id="NPV"></i>
+                                <input type="password" id="NewP" class="form-control validate" autocomplete="off"/>
+                                <label data-error="wrong" data-success="right" for="NewP">New Password</label>
+                            </div>
+                            <div class="md-form mb-5">
+                                <i class="fa fa-lock prefix grey-text"></i>
+								<i class="fa fa-eye-slash  float-right mt-3 text-dark" id="NCPV"></i>
+                                <input type="password" id="conP" class="form-control validate" autocomplete="off"/>
+                                <label data-error="wrong" data-success="right" for="conP">Confirm New Password</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class="btn btn-default" id="SubmitCP">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--change password-->
+        <!--register additional infor modal-->
+        <div class="modal fade" id="Reginfor" tabindex="-1" role="dialog" aria-labelledby="Reginfor" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold text-dark">Register additional information</h4>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <div class="md-form mb-2">
+                            <i class="prefix"></i>
+                            <input type="text" id="FName" class="form-control validate" />
+                            <label data-error="wrong" data-success="right" for="FName">First Name</label>
+                        </div>
+                        <div class="md-form mb-2">
+                            <i class="prefix"></i>
+                            <input type="text" id="LName" class="form-control validate" />
+                            <label data-error="wrong" data-success="right" for="LName">Last Name</label>
+                        </div>
+                        <div class="md-form mb-2">
+                            <i class="prefix"></i>
+                            <input type="text" id="MName" class="form-control validate" />
+                            <label data-error="wrong" data-success="right" for="MName">Middle Name</label>
+                        </div>
+                        <div class="md-form mb-2">
+                            <i class="prefix"></i>
+                            <input type="text" id="NickName" class="form-control validate" />
+                            <label data-error="wrong" data-success="right" for="NickName">Nick Name</label>
+                        </div>
+                        <div class="md-form mb-2">
+                            <i class="fa fa-phone prefix grey-text"></i>
+                            <input type="tel" id="PNumI" class="form-control validate" />
+                            <label data-error="wrong" data-success="right" for="PNumI">Phone Number</label>
+                        </div>
+                        <div class="md-form mb-3">
+                            <i class="fa fa-address-card prefix grey-text"></i>
+                            <input type="number" id="Idnum" class="form-control validate" required />
+                            <label data-error="wrong" data-success="right" for="Idnum">ID Number</label>
+                        </div>
+                        <div class="md-form pb-3">
+                            <i class="prefix"></i>
+                            <label for="Dob">Date of Birth</label>
+                        </div>
+                        <div class="md-form mb-2">
+                            <i class="fa fa-calender prefix grey-text"></i>
+                            <input type="date" id="Dob" class="form-control" placeholder="" required />
+                        </div>
+                        <div class="md-form mb-2">
+                            <i class="prefix"></i>
+                            <select class="form-control validate" id="genI">
+                                <option value="-1" selected>gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class="btn btn-default" id="addInfo">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--reg add info-->
+
+        <!--for bid Amount modal-->
+        <div class="modal fade" id="bidmountM" tabindex="-1" role="dialog" aria-labelledby="bidmountM" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body mx-3">
+                        <p><strong class=" text-dark">Enter amount to bid.</strong></p>
+                        <div class="text-center">
+                            <input type="tel" class="form-control" id="bidMV" name="bidMV" required autocomplete="off">
+                        </div>
+						<br>
+						<button type="button" class="float-left btn btn-sm btn-outline-danger waves-effect ml-auto" data-dismiss="modal">close</button>
+                        <button type="button" class="float-right btn btn-sm btn-outline-success waves-effect ml-auto" id="bidamBtn">ok</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--BiD Amount Modal-->
+
+        <!--Top up Amount modal-->
+    <div class="modal fade" id="TopupAmt" tabindex="-1" role="dialog" aria-labelledby="TopupAmt" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+    
+                    <div class="modal-body mx-3">
+                        <p><strong class=" text-dark">Enter PhoneNumber;</strong></p>
+                        <div class="text-center">
+                            <input type="tel" class="form-control" id="TopupPN" name="TopupPN" required autocomplete="off">
+                        </div>
+                        <br />
+                        <p><strong class=" text-dark">Enter amount to Topup in Ksh.</strong></p>
+                        <p><i class="text-dark">1 Denari = 5 Ksh.</i></p>
+                        <div class="text-center">
+                            <input type="number" class="form-control" id="TopupMV" name="TopupMV" required autocomplete="off">
+                        </div>
+                        <br>
+                        <button type="button" class="float-left btn btn-sm btn-outline-danger waves-effect ml-auto" data-dismiss="modal">close</button>
+                        <button type="button" class="float-right btn btn-sm btn-outline-success waves-effect ml-auto float-right" id="TopupBtn">ok</button>
+    
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+        <!--Top up Amount modal-->
+
+        <!--Bid Promote modal-->
+        <div class="modal fade" id="BPromote" tabindex="-1" role="dialog" aria-labelledby="BPromote" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body mx-3">
+                        <p><strong class=" text-dark">Enter by how many you want to multiply your bid with.</strong></p>
+                        <p class=" text-dark">e.g 2 ==(Bids Placed * 2)</p>
+                        <div class="text-center">
+                            <input type="number" class="form-control" id="BPA" name="BPA" required autocomplete="off">
+                        </div>
+						<br>
+						<button type="button" class="float-left btn btn-sm btn-outline-danger waves-effect ml-auto" data-dismiss="modal">close</button>
+                        <button type="button" class="float-right btn btn-sm btn-outline-success waves-effect ml-auto float-right" id="BPAbtn">ok</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--Bid Promote modal-->
+
+        <!--modal contact us-->
+        <div class="modal fade" id="mail" tabindex="-1" role="dialog" aria-labelledby="mail" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold text-dark">Write to us</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <div class="md-form mb-5">
+                            <i class="fa fa-user prefix grey-text"></i>
+                            <input type="text" id="Mname" class="form-control validate" />
+                            <label data-error="wrong" data-success="right" for="Mname">Your name</label>
+                        </div>
+
+                        <div class="md-form mb-5">
+                            <i class="fa fa-envelope prefix grey-text"></i>
+                            <input type="email" id="Memail" class="form-control validate" />
+                            <label data-error="wrong" data-success="right" for="Memail">Your email</label>
+                        </div>
+
+                        <div class="md-form mb-5">
+                            <i class="fa fa-tag prefix grey-text"></i>
+                            <input type="text" id="Msubject" class="form-control validate" />
+                            <label data-error="wrong" data-success="right" for="Msubject">Subject</label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-pencil prefix grey-text"></i>
+                            <textarea type="text" id="Mmessage" class="md-textarea form-control validate" rows="4"></textarea>
+                            <label data-error="wrong" data-success="right" for="Mmessage">Your message</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button id="Msend" class="btn btn-unique">Send <i class="fa fa-paper-plane-o ml-1"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--modal contact us-->
+
+        <!--Error modal-->
+        <div class="modal fade" id="ErrorM" tabindex="-1" role="dialog" aria-labelledby="ErrorM" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center bg-danger">
+                        <h4 class="modal-title w-100 font-weight-bold text-dark">Error!</h4>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <div id="errorMSG" class="text-dark">
+
+                        </div>
+                        <button type="button" class="btn btn-outline-danger waves-effect ml-auto float-right" data-dismiss="modal">ok</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--Error-->
+        <!--Success modal-->
+        <div class="modal fade" id="SuccessM" tabindex="-1" role="dialog" aria-labelledby="SuccessM" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center bg-success">
+                        <h4 class="modal-title w-100 font-weight-bold text-dark">Success</h4>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <div id="successMSG" class="text-dark">
+
+                        </div>
+                        <button type="button" class="btn btn-outline-success waves-effect ml-auto float-right" data-dismiss="modal">ok</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--success-->
+
+            <!--footer-->
+    <footer class="page-footer font-small unique-color-dark mt-4">
+
+            <div style="background-color:#6351ce;">
+                <div class="container">
+                    <!--Grid row-->
+                    <div class="row py-4 d-flex align-items-center">
+                        <!--Grid column-->
+                        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                            <h6 class="mb-0">Get connected with us on social networks!</h6>
+                        </div>
+                        <!--Grid column-->
+                        <!--Grid column-->
+                        <div class="col-md-6 col-lg-7 text-center text-md-right">
+                            <!--facebook-->
+                            <a class="fb-ic" href="https://www.facebook.com/PennyInc-500047700501658/?ti=as">
+                                <i class="fa fa-facebook white-text mr-4"></i>
+                            </a>
+                            <!--Twitter-->
+                            <a class="tw-ic" href="https://twitter.com/DenariGadgets?s=09">
+                                <i class="fa fa-twitter white-text mr-4"></i>
+                            </a>
+                            <!--instagram-->
+                            <a class="ins-ic" href="https://www.instagram.com/denarigadgets/">
+                                <i class="fa fa-instagram white-text"></i>
+                            </a>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+                </div>
+            </div>
+            <!--footer links-->
+            <div class="container text-center text-md-left mt-5">
+                <!--Grid row-->
+                <div class="row mt-3">
+                    <!--Grid column-->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                        <!--content-->
+                        <h6 class="text-uppercase font-weight-bold">PennyInc</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width:60px;" />
+                        <p>Penny Inc was conceptualized because one of us had the insight to see that there wasn’t any semblance of fairness in prices that would favour the pockets of the common man.</p>
+                    </div>
+                    <!--Grid column-->
+                    <!--Grid column-->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!--links-->
+                        <h6 class="text-uppercase font-weight-bold">More Products</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width:60px;" />
+                        <p>
+                            <a href="">Denari Alcohol</a>
+                        </p>
+                        <p>
+                            <a href="Vouchers.html">Denari vouchers</a>
+                        </p>
+                        <p>
+                            <a href="/">Denari Gadgets</a>
+                        </p>
+                    </div>
+                    <!--Grid column-->
+                    <!--Grid column-->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!--links-->
+                        <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width:60px;" />
+                        <p>
+                            <a href="TC.html">Terms and Conditions</a>
+                        </p>
+                        <p>
+                            <a href="faqs.html">FAQ's</a>
+                        </p>
+                        <p>
+                            All Rights Reserved
+                        </p>
+                    </div>
+                    <!--Grid column-->
+                    <!--Grid column-->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!--Links-->
+                        <h6 class="text-uppercase font-weight-bold">Contact Us</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width:60px;" />
+                        <p>
+                            <a href="mailto:support@pennyinc.co.ke"><i class="fa fa-envelope mr-3"></i>Denari gadgets</a>
+                        </p>
+                        <p>
+                            <a href="tel:+254757698238 "> <i class="fa fa-phone mr-3"></i><b>Safaricom</b>+254 757 698 238 </a>
+                         </p>
+                         <p>
+                             <a href="tel:+254781636684 "> <i class="fa fa-phone mr-3"></i><b>Airtel</b>+254 781 636 684 </a>
+                          </p>
+                    </div>
+                    <!--Grid column-->
+                </div>
+                <!--Grid row-->
+            </div>
+            <!--footer links-->
+            <!--Copyright-->
+            <div class="footer-copyright text-center py-3">
+                &#169 2018 Copyright:
+                <a href="http://pennyinc.co.ke">PennyInc</a>
+            </div>
+            <!--copyright-->
+</footer>
+    <!--footer-->
+
+	
+	
+    <!-- SCRIPTS -->
+    
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Initializations -->
+    <script type="text/javascript">
+        //popover
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+        $('.popover-dismiss').popover({
+            trigger: 'focus'
+        })
+    // Animations initialization
+        new WOW().init();
+
+    </script>
+    <!--custom js-->
+    <script type="text/javascript" src="pagejs/Aproductsjs.js"></script>
+</body>
+</html>

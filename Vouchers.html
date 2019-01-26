@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="betting ,bet, Alcohols, liquor, bid, bidder, e-commerce ,shop, Denari, shopping, market"/>
+
+
+    <title>Denari Vouchers:bidding site for vouchers.</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+    <style type="text/css">
+        
+		.z-depth-1a{
+			-webkit-box-shadow:0 2px 5px 0 rgba(55, 161, 255, 0.26),0 4px 12px 0 rgba(121, 155, 254, 0.25);
+			box-shadow:0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25);
+		}
+    </style>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94013900-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94013900-2');
+</script>
+
+
+</head>
+<body>
+
+    <!--modal:login/Register-->
+    <div class="modal fade" id="modalRform" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+        <div class="modal-dialog cascading-modal" role="document">
+            <!--content-->
+            <div class="modal-content">
+
+                <!--Modal cascading tabs-->
+                <div class="modal-c-tabs">
+
+                    <!--Nav tabs-->
+                    <ul class="nav nav-tabs tabs-2 light-blue darken-3" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#logIn" role="tab"><i class="fa fa-key mr-1"></i> Login </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#signUp" role="tab"><i class="fa fa-user mr-1"></i> Register</a>
+                        </li>
+                    </ul>
+
+                    <!--Tab panels-->
+                    <div class="tab-content">
+                        <!--panel 7-->
+                        <div class="tab-pane fade nav-link show active" id="logIn" role="tabpanel">
+
+                            <!--Body-->
+                            <div class="modal-body mb1">
+                                <div class="md-form form-sm mb-5">
+                                    <i class="fa fa-envelope prefix"></i>
+                                    <input type="email" id="Email" class="form-control form-control-sm validate" required />
+                                    <label data-error="wrong" data-success="right" for="Email">Your email</label>
+                                </div>
+
+                                <div class="md-form form-sm mb-1">
+                                    <i class="fa fa-lock prefix"></i>
+									<i class="fa fa-eye-slash  float-right mt-3 text-dark" id="LPV"></i>
+                                    <input type="password" id="PwordL" class="form-control form-control-sm validate" required />
+                                    <label data-error="wrong" data-success="right" for="PwordL">Your password</label>
+								</div>
+								<br />
+                                <i class="text-danger invisible" style="font-size:smaller;font-weight:bolder;" id="phint">hint: Strong password must contain an uppercase letter, a numer, small letter, a symbol (eg.@#./)and should be greater than 8 characters.</i>
+									
+									<br>
+									<div class="form-group mb-1">
+										<i class="prefix"></i>
+										<input class="form-check-input" type="checkbox" id="RembD" name="RembD">
+										<label for="RembD" class="form-check-label">Remember Me</label>
+									</div>
+									<br>
+									<div class="form-group mb-1">
+										<i class="prefix"></i>
+										<input class="form-check-input" type="checkbox" id="RembMe" name="RembMe">
+										<label for="RembMe" class="form-check-label">Keep Me Logged in</label>
+									</div>
+									
+                                
+							
+                                <div class="text-center mt-2">
+                                    <button class="btn btn-info" id="SubmitL">Log in<i class="fa fa-sign-in ml-1"></i></button>
+                                </div>
+								<p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2">or Sign in with:</p>
+								
+								<div class="row my-3 d-flex justify-content-center">
+								
+									<!--facebook-->
+									<button type="button" class="btn btn-primary btn-rounded mr-md-3 z-depth-1a text-white" id="fbLogin"><i class="fa fa-facebook text-center"></i></button>
+									<!--google-->
+									<button type="button" class="btn btn-danger btn-rounded z-depth-1a text-white" id="ggLogin"><i class="fa fa-google-plus text-center"></i></button>
+								</div>
+                            </div>
+                            <!--footer-->
+                            <div class="modal-footer">
+                                <div class="options text-center text-md-right mt-1">
+
+                                    <p>Forgot <a id="changeP" class="blue-text">password?</a></p>
+                                </div>
+                                <button type="button" class="btn btn-outline-info btn-sm waves-effect ml-auto" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        <!--/.panel 7-->
+                        <!--panel 8-->
+                        <div class="tab-pane fade" id="signUp" role="tabpanel">
+
+                            <!--Body-->
+                            <div class="modal-body">
+                                <div class="md-form form-sm mb-5">
+                                    <i class="fa fa-envelope prefix"></i>
+                                    <input type="email" id="EmailS" class="form-control form-control-sm validate" />
+                                    <label data-error="wrong" data-success="right" for="EmailS">Your Email</label>
+                                </div>
+
+                                <div class="md-form form-sm mb-5">
+                                    <i class="prefix"></i>
+                                    <input type="text" id="firstname" class="form-control form-control-sm validate" required />
+                                    <label data-error="wrong" data-success="right" for="firstname">First Name</label>
+                                </div>
+
+                                <div class="md-form form-sm mb-5">
+                                    <i class="prefix"></i>
+                                    <input type="text" id="lastname" class="form-control form-control-sm validate" required />
+                                    <label data-error="wrong" data-success="right" for="lastname">Last Name</label>
+                                </div>
+
+                                <div class="md-form form-sm mb-5">
+                                    <i class="fa fa-lock prefix"></i>
+									<i class="fa fa-eye-slash  float-right mt-3 text-dark" id="SPV"></i>
+                                    <input type="password" id="PwordS" class="form-control form-control-sm validate" />
+                                    <label data-error="wrong" data-success="right" for="PwordS">Your password</label>
+                                </div>
+
+                                <div class="md-form form-sm mb-4">
+                                    <i class="fa fa-lock prefix"></i>
+									<i class="fa fa-eye-slash  float-right mt-3 text-dark" id="SCPV"></i>
+                                    <input type="password" id="Cpword" class="form-control form-control-sm validate" />
+                                    <label data-error="wrong" data-success="right" for="Cpword">Repeat password</label>
+                                </div>
+								<br />
+                                <i class="text-danger invisible" style="font-size:smaller;font-weight:bolder;" id="phints">hint: Strong password must contain an uppercase letter, a numer, small letter, a symbol (eg.@#./)and should be greater than 8 characters.</i>
+								<br>
+									<div class="form-group mb-1">
+										<i class="prefix"></i>
+										<input class="form-check-input" type="checkbox" id="TC" name="TC">
+										<label for="TC" class="form-check-label"><a href="TC.html">Accept Terms and Conditions</a></label>
+									</div>
+                                <div class="text-center form-sm mt-2">
+                                    <button id="SubmitS" class="btn btn-info">Sign up <i class="fa fa-sign-in ml-1"></i></button>
+                                </div>
+
+                            </div>
+                            <!--footer-->
+                            <div class="modal-footer">
+
+                                <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        <!--/.panel 8-->
+                    </div>
+                </div>
+            </div>
+            <!--/.content-->
+        </div>
+    </div>
+    <!--modal: login/Register Form-->
+
+    <!--Navbar-->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark mdb-color white-text scrolling-navbar">
+        <div class="container">
+            <!--Brand-->
+            <a class="navbar-brand waves-effect" href="Vouchers.html">
+                <strong class="blue-text">Denari Vouchers</strong>
+            </a>
+
+            <!--collapse-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!--Links-->
+            <div class="collapse navbar-collapse" id="navbarContent">
+
+                <!--Left-->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="ourStory.html" target="_self">Our Story</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="howTo.html" target="_self">How to Bid.</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link waves-effect" href="faqs.html" target="_self">FAQ's.</a>
+                        </li>
+                </ul>
+
+                <!--Right Contents-->
+                <ul class="navbar-nav nav-flex-icons">
+                    <li class="nav-item">
+                        <div class="text-center">
+                            <a href="" class="btn mdb-color btn-rounded" data-toggle="modal" data-target="#modalRform">login/Register</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Navbar-->
+
+    <!--main layer-->
+    <main>
+        <div class="container pt-5">
+            <!--category navbar-->
+            <nav class="navbar navbar-expand-lg navbar-dark secondary-color mt-5 mb-5">
+
+                <!--Navbar brand-->
+                <span class="navbar-brand">Categories:</span>
+
+                <!--Collapse button-->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#CategoryNav" aria-controls="CategoryNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!--Collapsible content-->
+                <div class="collapse navbar-collapse" id="CategoryNav">
+
+                    <!--Links-->
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href=""><span class="fa fa-gift"></span> Denari Vouchers
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/"><span class="fa fa-"></span> Denari Gadgets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Alcohols.html"><span class="fa fa-beer"></span> Denari Alcohol</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </nav>
+            <!--Navbar-->
+
+            <!--section: product-->
+           
+			
+					<div class="row" id="products" style="display:flex;">
+					
+						<i class="fa fa-spinner fa-spin fa-5x fa-fw"></i>
+					</div>
+			
+                
+           
+
+            <!--section product-->
+        </div>
+		
+    </main>
+    <!--main layout-->
+
+    
+
+    <!--modal contact us-->
+    <div class="modal fade" id="mail" tabindex="-1" role="dialog" aria-labelledby="mail" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold text-dark">Write to us</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-5">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input type="text" id="Mname" class="form-control validate" />
+                        <label data-error="wrong" data-success="right" for="Mname">Your name</label>
+                    </div>
+
+                    <div class="md-form mb-5">
+                        <i class="fa fa-envelope prefix grey-text"></i>
+                        <input type="email" id="Memail" class="form-control validate" />
+                        <label data-error="wrong" data-success="right" for="Memail">Your email</label>
+                    </div>
+
+                    <div class="md-form mb-5">
+                        <i class="fa fa-tag prefix grey-text"></i>
+                        <input type="text" id="Msubject" class="form-control validate" />
+                        <label data-error="wrong" data-success="right" for="Msubject">Subject</label>
+                    </div>
+
+                    <div class="md-form">
+                        <i class="fa fa-pencil prefix grey-text"></i>
+                        <textarea type="text" id="Mmessage" class="md-textarea form-control validate" rows="4"></textarea>
+                        <label data-error="wrong" data-success="right" for="Mmessage">Your message</label>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button id="Msend" class="btn btn-unique">Send <i class="fa fa-paper-plane-o ml-1"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal contact us-->
+
+    <!--contact us-->
+    <div class="container fixed-bottom ">
+        <div class="row">
+            <div class="col">
+
+                <button class="btn btn-primary float-right  mb-4" type="button" data-toggle="modal" data-target="#mail"><i class="fa fa-envelope fa-inverse"></i></button>
+
+            </div>
+        </div>
+    </div>
+    <!--contact us-->
+
+    <!--Error modal-->
+    <div class="modal fade" id="ErrorM" tabindex="-1" role="dialog" aria-labelledby="ErrorM" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center bg-danger">
+                    <h4 class="modal-title w-100 font-weight-bold text-dark">Error!</h4>
+                </div>
+                <div class="modal-body mx-3">
+                    <div id="errorMSG">
+
+                    </div>
+                    <button type="button" class="btn btn-outline-danger waves-effect ml-auto float-right" data-dismiss="modal">ok</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Error-->
+    <!--Success modal-->
+    <div class="modal fade" id="SuccessM" tabindex="-1" role="dialog" aria-labelledby="SuccessM" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center bg-success">
+                    <h4 class="modal-title w-100 font-weight-bold text-dark">Success</h4>
+                </div>
+                <div class="modal-body mx-3">
+                    <div id="successMSG">
+
+                    </div>
+                    <button type="button" class="btn btn-outline-success waves-effect ml-auto float-right" data-dismiss="modal">ok</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--success-->
+    <!--processing modal-->
+    <div class="modal fade modal-top modal-dialog" id="ProcessM" tabindex="-1" role="dialog" aria-labelledby="ProcessM" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="width:200px;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body mx-3 text-center">
+                            <i class="fa fa-spinner fa-spin fa-5x fa-fw"></i>
+                            <b class="text-dark">processing...</b>
+                            <b class="text-dark" id="Pm"></b>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--processing modal-->
+
+    <!--footer-->
+    <footer class="page-footer font-small unique-color-dark mt-4">
+
+        <div style="background-color:#6351ce;">
+            <div class="container">
+                <!--Grid row-->
+                <div class="row py-4 d-flex align-items-center">
+                    <!--Grid column-->
+                    <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                        <h6 class="mb-0">Get connected with us on social networks!</h6>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6 col-lg-7 text-center text-md-right">
+                        <!--facebook-->
+                        <a class="fb-ic" href="https://www.facebook.com/PennyInc-500047700501658/?ti=as">
+                             <i class="fa fa-facebook white-text mr-4"></i>
+                        </a>
+                        <!--Twitter-->
+                        <a class="tw-ic" href="https://twitter.com/DenariGadgets?s=09">
+                            <i class="fa fa-twitter white-text mr-4"></i>
+                        </a>
+                        <!--instagram-->
+                        <a class="ins-ic" href="https://www.instagram.com/denarigadgets/">
+                            <i class="fa fa-instagram white-text"></i>
+                        </a>
+                    </div>
+                    <!--Grid column-->
+                </div>
+                <!--Grid row-->
+            </div>
+        </div>
+
+        <!--footer links-->
+        <div class="container text-center text-md-left mt-5">
+            <!--Grid row-->
+            <div class="row mt-3">
+                <!--Grid column-->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                    <!--content-->
+                    <h6 class="text-uppercase font-weight-bold">PennyInc</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width:60px;" />
+                    <p>Penny Inc was conceptualized because one of us had the insight to see that there wasn’t any semblance of fairness in prices that would favour the pockets of the common man.</p>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!--links-->
+                    <h6 class="text-uppercase font-weight-bold">More Products</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width:60px;" />
+                    <p>
+                        <a href="">Denari vouchers</a>
+                    </p>
+                    <p>
+                        <a href="Alcohols.html">Denari Alcohol</a>
+                    </p>
+                    <p>
+                        <a href="/">Denari Gadgets</a>
+                    </p>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!--links-->
+                    <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width:60px;" />
+                    <p>
+                        <a href="TC.html">Terms and Conditions</a>
+                    </p>
+                    <p>
+                        <a href="faqs.html">FAQ's</a>
+                    </p>
+                    <p>
+                        All Rights Reserved
+                    </p>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <!--Links-->
+                    <h6 class="text-uppercase font-weight-bold">Contact Us</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width:60px;" />
+                    <p>
+                        <a href="mailto:support@pennyinc.co.ke"><i class="fa fa-envelope mr-3"></i>Denari gadgets</a>
+                    </p>
+                    <p>
+                        <a href="tel:+254757698238 "> <i class="fa fa-phone mr-3"></i><b>Safaricom</b>+254 757 698 238 </a>
+                     </p>
+                     <p>
+                         <a href="tel:+254781636684 "> <i class="fa fa-phone mr-3"></i><b>Airtel</b>+254 781 636 684 </a>
+                      </p>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+        </div>
+        <!--footer links-->
+
+        <!--Copyright-->
+        <div class="footer-copyright text-center py-3">&#169 2018 Copyright:
+            <a href="http://pennyinc.co.ke">PennyInc</a>
+        </div>
+        <!--copyright-->
+    </footer>
+    <!--footer-->
+
+    <!-- SCRIPTS -->
+    
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Initializations -->
+    <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+    </script>
+    <!--custom javascript-->
+    <script type="text/javascript" src="pagejs/Vouchersjs.js"></script>
+</body>
+</html>

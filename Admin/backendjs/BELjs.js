@@ -64,11 +64,11 @@ function symbolValidator(pass) {
 //The login area
 $('#submitBE').click(function(event){
 	event.preventDefault();
-	var username=$('#Uname').val();
+	var email=$('#Uname').val();
 	var password=$('#Pword').val();
-    
-        
-		
+
+
+
 	var lengthValid = lengthValidator(password);
 
 	if (lengthValid) {
@@ -89,23 +89,23 @@ $('#submitBE').click(function(event){
 			'Content-Type':'application/json'
 		}
 	});
-      
+
 	$.ajax({
-		url:"https://pennycoreapi.azurewebsites.net/oAuth2/GetToken",
-      
+		url:"http://127.0.0.1:5000/api/auth/getToken",
+
 		method:'POST',
 		dataType:'json',
-		data:JSON.stringify({'username':username,'password':password}),
+		data:JSON.stringify({'email':email,'password':password}),
 		success:function(ResponseBody){
-          
+
 			console.log(JSON.stringify(ResponseBody));
-          
+
 			userResponse =JSON.parse(JSON.stringify(ResponseBody));
 			if(userResponse.access_token!=""){
 				if(typeof(Storage)!=="undefined"){
 					sessionStorage.Osession=userResponse.access_token;
 					sessionStorage.Otype=userResponse.token_type;
-				
+
 					$('#successMSG').html("Login successful!");
 					$('#SuccessM').modal('show');
 					$('#submitBE').removeClass('disabled');
@@ -118,22 +118,23 @@ $('#submitBE').click(function(event){
 				    $('#ErrorM').modal('show');
 					return false;
 				}
-			
-           
-           
+
+
+
 			} else {
 			    $('#submitBE').removeClass('disabled');
 			    $('#submitBE').html('Log in');
 			    $('#errorMSG').html("Failed! Your Email or password is invalid");
 			    $('#ErrorM').modal('show');
 			}
-        
-		}, 
+
+		},
 		error:function(error){
 		    console.log(JSON.stringify(error));
+        err=JSON.parse(JSON.stringify(error));
 		    $('#submitBE').removeClass('disabled');
 		    $('#submitBE').html('Log in');
-		    $('#errorMSG').html("Failed!Please try again later.");
+		    $('#errorMSG').html(err.responseJSON.message);
 		    $('#ErrorM').modal('show');
 		}
 	});
@@ -157,7 +158,6 @@ $('#submitBE').click(function(event){
         $('#PwordS').focus();
         return false;
     }
-    
-});
-});
 
+});
+});

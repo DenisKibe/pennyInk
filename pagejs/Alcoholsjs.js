@@ -8,7 +8,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 	}
 
 	$.fn.showclock = function(Year,Month,Day,Hour,Mins,Sec) {
-	    
+
 	    var currentDate=new Date();
 	    //var fieldDate=$(this).data('date').split('-');
 	    var futureDate=new Date(Year,Month,Day,Hour,Mins,Sec);
@@ -21,26 +21,26 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 
 	    var days=Math.floor(seconds/86400);
 	    seconds=seconds%86400;
-	    
+
 	    var hours=Math.floor(seconds/3600);
 	    seconds=seconds%3600;
 
 	    var minutes=Math.floor(seconds/60);
 	    seconds=Math.floor(seconds%60);
-	    
+
 	    var html="";
 
 	    if(days!=0){
 		    html+="<span class='countdown-value days-bottom'>"+pad(days)+"d:</span>";
-		   
+
 		}
 
 	    html+="<span class='countdown-value hours-bottom'>"+pad(hours)+"h:</span>";
-	    
+
 	    	html+="<span class='countdown-value minutes-bottom'>"+pad(minutes)+"m:</span>";
-	    
+
 	    	html+="<span class='countdown-value seconds-bottom'>"+pad(seconds)+"s</span>";
-	   
+
 
 	    this.html(html);
 	};
@@ -49,9 +49,9 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 		var el=$(this);
 		el.showclock(Year,Month,Day,Hour,Mins,Sec);
 		setInterval(function(){
-			el.showclock(Year,Month,Day,Hour,Mins,Sec);	
+			el.showclock(Year,Month,Day,Hour,Mins,Sec);
 		},1000);
-		
+
 	}
 
 }(jQuery));
@@ -120,16 +120,16 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 	if (sessionStorage.getItem('session') != null && sessionStorage.getItem('session')!="undefined") {
 		window.location = "AlcoholsProducts.html";
 	}
-	
-	
+
+
 	$(document).ready(function(){
-	
+
 		var outletResponse;
 		var userResponse;
 		var pname;
 		OutAuthN=CryptoJS.AES.decrypt(sessionStorage.OName,sessionStorage.ONameEn).toString(CryptoJS.enc.Utf8);
 		OutAuthP=CryptoJS.AES.decrypt(sessionStorage.OPass,sessionStorage.OPassEn).toString(CryptoJS.enc.Utf8);
-		
+
 		//for the products in the splash screen
 		$.ajax({
 			url:"https://pennycoreapi.azurewebsites.net/oAuth2/GetToken",
@@ -150,9 +150,9 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 				console.log(JSON.stringify(error));
 			},
 			complete:function(){
- 
+
 				$.ajax({
-				    url: 'https://pennycoreapi.azurewebsites.net/Auction/GetAuctions?state=ACTIVE&category=142f0009-91cc-4160-9d80-2141f712f7cb',
+				    url: 'http://127.0.0.1/api/products?state=ACTIVE&category=142f0009-91cc-4160-9d80-2141f712f7cb',
 					method:'Get',
 					dataType:'json',
 					headers:{
@@ -220,7 +220,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 				$('#PwordL').val(localStorage.Pword);
 			}
 		});
-		
+
 		//for the login
 		$('#SubmitL').click(function(event){
 			event.preventDefault();
@@ -247,7 +247,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 			            if (numberValid) {
 			                var symbolValid = symbolValidator(password);
 			                if (symbolValid) {
-								
+
 								$('#SubmitL').addClass('disabled');
 								$('#SubmitL').html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>');
 
@@ -269,12 +269,12 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 			                                if (typeof (Storage) !== "undefined") {
 			                                    sessionStorage.session = userResponse.access_token;
 			                                    sessionStorage.type = userResponse.token_type;
-												
+
 												if(saveD){
 													localStorage.Uname=username;
 													localStorage.Pword=password;
 												}
-													
+
 												if(Remember){
 													localStorage.session=userResponse.access_token;
 													localStorage.type=userResponse.token_type;
@@ -292,7 +292,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 			                                        $('#ErrorM').modal('show');
 			                                        return false;
 			                                    }
-			                                    
+
 			                                } else {
 												$('#SubmitL').removeClass('disabled');
 												$('#SubmitL').html('Log in');
@@ -357,7 +357,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 			}
 			password=$('#PwordS').val();
 			confirmPassword=$('#Cpword').val();
-			
+
 			if (password != confirmPassword) {
 			    $('#errorMSG').html("Password does not much!");
 			    $('#ErrorM').modal('show');
@@ -378,10 +378,10 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 			            if (numberValid) {
 			                var symbolValid = symbolValidator(password);
 			                if (symbolValid) {
-								
+
 								$('#SubmitS').addClass('disabled');
 								$('#SubmitS').html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>');
-			                    
+
 
 			                            var email = $('#EmailS').val();
 			                            var fName = $('#firstname').val();
@@ -436,7 +436,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 			    return false;
 			}
 
-			
+
 
 		});
 
@@ -449,10 +449,10 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 		    if (username == "") {
 		        $('#errorMSG').html("please fill out this field.");
 		        $('#ErrorM').modal('show');
-				
+
 				$("#Email").focus();
-				
-				
+
+
 				return false;
 			}
 			$("#Pm").html("Sending password reset Link..")
@@ -478,7 +478,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 
 			});
 		});
-		
+
 		//for the view password in login field
 		$('#LPV').click(function(event){
 			event.preventDefault();
@@ -490,7 +490,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 				$('#PwordL').attr('type','password');
 			}
 		});
-		
+
 		//for the view password in sign up field
 		$('#SPV').click(function(event){
 			event.preventDefault();
@@ -513,7 +513,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 				$('#Cpword').attr('type','password');
 			}
         });
-        
+
         //To send emails
     $("#Msend").click(function (event) {
         event.preventDefault();
@@ -530,8 +530,8 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
         }
         $('#Msend').addClass('disabled');
         $('#Msend').html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>');
-       
-        
+
+
                 $.ajax({
                     url: 'https://pennycoreapi.azurewebsites.net/api/Account/SendEmail',
                     method: 'POST',

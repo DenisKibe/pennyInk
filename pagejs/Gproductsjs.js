@@ -1,5 +1,4 @@
-
-sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX19db19/l9WrPhELJLZW74bbvw0dZC3ilW1RG4fISbLIAgo3nllBAVcQ";var OutAuthN;sessionStorage.OPass="U2FsdGVkX1+tg2/0WmWeVXDcQbAHi/p3PcTpVoEJaUk=";sessionStorage.ONameEn="1z2y3x4w5v";
+sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX1/mOpstMQvax8KGHq1mRI2cQImKFsoWiZg=";var OutAuthN;sessionStorage.OPass="U2FsdGVkX19sqkGQ+ygRohHIbzxGq03NfiWCxp6sCf4=";sessionStorage.ONameEn="1z2y3x4w5v";
 
 //for the timer
 (function ( $ ) {
@@ -8,7 +7,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 	}
 
 	$.fn.showclock = function(Year,Month,Day,Hour,Mins,Sec) {
-	    
+
 	    var currentDate=new Date();
 	    //var fieldDate=$(this).data('date').split('-');
 	    var futureDate=new Date(Year,Month,Day,Hour,Mins,Sec);
@@ -21,26 +20,26 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 
 	    var days=Math.floor(seconds/86400);
 	    seconds=seconds%86400;
-	    
+
 	    var hours=Math.floor(seconds/3600);
 	    seconds=seconds%3600;
 
 	    var minutes=Math.floor(seconds/60);
 	    seconds=Math.floor(seconds%60);
-	    
+
 	    var html="";
 
 	    if(days!=0){
 		    html+="<span class='countdown-value days-bottom'>"+pad(days)+"d:</span>";
-		   
+
 		}
 
 	    html+="<span class='countdown-value hours-bottom'>"+pad(hours)+"h:</span>";
-	    
+
 	    	html+="<span class='countdown-value minutes-bottom'>"+pad(minutes)+"m:</span>";
-	    
+
 	    	html+="<span class='countdown-value seconds-bottom'>"+pad(seconds)+"s</span>";
-	   
+
 
 	    this.html(html);
 	};
@@ -49,9 +48,9 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 		var el=$(this);
 		el.showclock(Year,Month,Day,Hour,Mins,Sec);
 		setInterval(function(){
-			el.showclock(Year,Month,Day,Hour,Mins,Sec);	
+			el.showclock(Year,Month,Day,Hour,Mins,Sec);
 		},1000);
-		
+
 	}
 
 }(jQuery));
@@ -69,27 +68,33 @@ function sappendProducts(){
 	passid(auctionid)
 	function passid(auctionid){
 	$.ajax({
-		url:'https://pennycoreapi.azurewebsites.net/Auction/GetBidderRanking?auctionId='+auctionid,
+		url:'http://127.0.0.1:5000/api/bid?auctionId='+auctionid,
 		method:'Get',
 		headers:{
 			'Content-Type':'application/json',
-			'Authorization':'bearer '+sessionStorage.Osession
+			'Authorization':'Bearer '+sessionStorage.Osession
 		},
-		
-		dataType:'json',
-		
-		data:{'auctionId':auctionid},
-		success:function(ResponseBody){
-		  console.log(JSON.stringify(ResponseBody));
-				  result=ResponseBody[0].userName
 
-				  
+		dataType:'json',
+
+		processData:false,
+		success:function(ResponseBody){
+		  console.log(JSON.parse(JSON.stringify(ResponseBody)).length);
+				if (JSON.parse(JSON.stringify(ResponseBody)).length > 0){
+					result=ResponseBody[0].userName;
+				}
+				else{
+					result = '';
+				}
+
+
+
 								var extime;
-									extime=JSON.stringify(pproduct[q].expiryDate).slice(1,-1);
+									extime=JSON.stringify(pproduct[q].expiry_date).slice(1,-1);
 									var date;
 									Sep=extime.indexOf('T');
 									date=extime.slice(0,Sep);
-									date=date.split('-');
+									date=date.split(':');
 									var mwaka=date[0];
 									var mwezi=date[1]-1;
 									var siku=date[2];
@@ -102,8 +107,9 @@ function sappendProducts(){
 									var sekunde=time[2];
 									var expc=new Date().getTime()/1000;
 									var newd=new Date(mwaka,mwezi,siku,saa,dakika,sekunde).getTime()/1000;
-									
-						        $("#content").append('<div class="col-lg-4 col-md-6 col-sm-6 c0l-12 mb-lg-0 mb-4 " style="display:flex;"><div class="card mb-3 text-center pb-2 hoverable wow zoomInRight" data-wow-delay="1.0"><b>Leading->'+result+'</b><div class="view view-cascade overlay"><!--featured image--><div class=" view overlay"><img src="' +JSON.stringify(pproduct[q].imageUrl).slice(1,-1) + '" class="img-fluid" alt="' + JSON.stringify(pproduct[q].name).slice(1,-1) + '" /><a><div class="mask rgba-white-slight"></div></a></div></div><!--Excerpt--><div class="card-body"><h4 class="mb-4"><strong>' + JSON.stringify(pproduct[q].name).slice(1,-1) + '</strong></h4><p><a class="lead" data-toggle="collapse" href="#Description' + JSON.stringify(pproduct[q].id).slice(1,-1)+ '" aria-expanded="false" aria-controls="Description">Description <span class="fa fa-angle-down"></span></a><!--collapse element--><div class="collapse" id="Description' + JSON.stringify(pproduct[q].id).slice(1,-1) + '"><div class="mt-3 mb-2">' + JSON.stringify(pproduct[q].description).slice(1,-1) + '</div></div></p><p class="lead "><span class="mr-2"><del>KSh ' + JSON.stringify(pproduct[q].retailPrice) + '</del></span><span class="font-weight-bold text-info">' + JSON.stringify(pproduct[q].auctionPrice) + '</span> Denaris</p><h5 class="font-weight-bold text-center text-default"><strong><span class="fa fa-clock-o"></span><span id="expires'+JSON.stringify(pproduct[q].id).slice(1,-1)+'"></span></strong></h5><button class="btn btn-outline-deep-purple btn-sm float-left waves-effect" type="button" id="' +JSON.stringify(pproduct[q].id).slice(1,-1) + '" name="' + JSON.stringify(pproduct[q].auctionPrice) + '">Bid Now</button><button class="btn btn-success btn-sm float-right" type="Rank" data-toggle="modal" id="' + JSON.stringify(pproduct[q].id).slice(1,-1) + '"><span class="fa fa-bar-chart fa-lg"></span></button></div></div></div>');
+										console.log(newd)
+
+						        $("#content").append('<div class="col-lg-4 col-md-6 col-sm-6 c0l-12 mb-lg-0 mb-4 " style="display:flex;"><div class="card mb-3 text-center pb-2 hoverable wow zoomInRight" data-wow-delay="1.0"><b>Leading->'+result+'</b><div class="view view-cascade overlay"><!--featured image--><div class=" view overlay"><img src="' +JSON.stringify(pproduct[q].image_url).slice(1,-1) + '" class="img-fluid" alt="' + JSON.stringify(pproduct[q].name).slice(1,-1) + '" /><a><div class="mask rgba-white-slight"></div></a></div></div><!--Excerpt--><div class="card-body"><h4 class="mb-4"><strong>' + JSON.stringify(pproduct[q].name).slice(1,-1) + '</strong></h4><p><a class="lead" data-toggle="collapse" href="#Description' + JSON.stringify(pproduct[q].id).slice(1,-1)+ '" aria-expanded="false" aria-controls="Description">Description <span class="fa fa-angle-down"></span></a><!--collapse element--><div class="collapse" id="Description' + JSON.stringify(pproduct[q].id).slice(1,-1) + '"><div class="mt-3 mb-2">' + JSON.stringify(pproduct[q].description).slice(1,-1) + '</div></div></p><p class="lead "><span class="mr-2"><del>KSh </del></span><span class="font-weight-bold text-info"> </span> Denaris</p><h5 class="font-weight-bold text-center text-default"><strong><span class="fa fa-clock-o"></span><span id="expires'+JSON.stringify(pproduct[q].id).slice(1,-1)+'"></span></strong></h5><button class="btn btn-outline-deep-purple btn-sm float-left waves-effect" type="button" id="' +JSON.stringify(pproduct[q].id).slice(1,-1) + '" name="">Bid Now</button><button class="btn btn-success btn-sm float-right" type="Rank" data-toggle="modal" id="' + JSON.stringify(pproduct[q].id).slice(1,-1) + '"><span class="fa fa-bar-chart fa-lg"></span></button></div></div></div>');
 								jQuery("#expires"+JSON.stringify(pproduct[q].id).slice(1,-1)).countdown(mwaka,mwezi,siku,saa,dakika,sekunde);
 								nxtProduct()
 								if(q<Number(localStorage.productsLength)){
@@ -174,8 +180,8 @@ function sappendProducts(){
 				return false;
 			}
 		};
-	
-	
+
+
 if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('session')=="undefined") && (localStorage.getItem('session')===null || localStorage.getItem('session')=="undefined")) {
 
         window.location = "/";
@@ -188,18 +194,18 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 		    localStorage.removeItem("ExpTime");
 			$('#errorMSG').html("Your session expired!You have to login again.");
             $('#ErrorM').modal('show');
-			
+
 			window.location = "/";
 		}else{
 			sessionStorage.session = localStorage.session;
 			sessionStorage.type = localStorage.type;
 		}
 	}
-	
+
 
 	$(document).ready(function(){
 
-		
+
 
 	$.ajaxSetup({
 			headers:{
@@ -212,7 +218,7 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 	var Phonenumber;
 	//ajaxs for account user info
         $.ajax({
-            url:'https://pennycoreapi.azurewebsites.net/api/Account/UserInfo',
+            url:'http://127.0.0.1:5000/api/accontInfo',
             method:'Get',
             dataType:'json',
             processData:false,
@@ -226,9 +232,10 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
                 var Username = ResponseBody.username;
                 $("#username").html(Username);
                 var EMail = ResponseBody.email;
-				$("#email").html(EMail);
+								$("#email").html(EMail);
 				var profilePic=ResponseBody.ProfilePic;
-				if(profilePic===null){}
+				console.log(profilePic);
+				if(profilePic==null){}
 				else{
 				$("#Ppic").attr("src",profilePic);
 				}
@@ -246,9 +253,9 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
                 } else {
                     $("#CE").html("<span class='fa fa-close'></span>");
 
-                    //send confirmation email 
+                    //send confirmation email
                     $.ajax({
-                        url: 'https://pennycoreapi.azurewebsites.net/api/Account/SendEmailConfirmation',
+                        url: 'http:127.0.0.1:5000/api/sendEmailVerification',
                         method: 'POST',
                         dataType: 'json',
                         data: JSON.stringify({ 'confirmationEndpoint': 'https://www.pennyinc.co.ke/confirmEmail.html', 'appName': 'Denari Gadgets' }),
@@ -280,42 +287,43 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
                 $('#ErrorM').modal('show');
             }
         });
-	
+
 	var outletResponse;
 	var ResponsePC;
 	var BtnId;
 	var price;
 	var pid;
 	var pname;
-	
-	
+
+
 	$("#bonusL").click(function () {
 	    $('#errorMSG').html("Bonus will be unlocked on Your first Deposite.");
 	    $('#ErrorM').modal('show');
 	});
 
-		
-		
+
+
 		OutAuthN=CryptoJS.AES.decrypt(sessionStorage.OName,sessionStorage.ONameEn).toString(CryptoJS.enc.Utf8);
+
 		OutAuthP=CryptoJS.AES.decrypt(sessionStorage.OPass,sessionStorage.OPassEn).toString(CryptoJS.enc.Utf8);
 
         //outlet user token
 		$.ajax({
-			url:"https://pennycoreapi.azurewebsites.net/oAuth2/GetToken",
+			url:"http://127.0.0.1:5000/api/auth/getToken",
 
 			method:'POST',
 			dataType:'json',
 			headers:{
 				'Content-Type':'application/json'
 			},
-			data:JSON.stringify({'username':OutAuthN,'password':OutAuthP}),
+			data:JSON.stringify({'email':OutAuthN,'password':OutAuthP}),
 			success:function(ResponseBody){
 
 				outletResponse =JSON.parse(JSON.stringify(ResponseBody));
 				sessionStorage.Osession=outletResponse.access_token;
 				console.log(JSON.stringify(ResponseBody));
 
-				
+
 			},
 			error:function(error){
 				console.log(JSON.stringify(error));
@@ -324,21 +332,21 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 
 				//for the Auctioning products
 				$.ajax({
-					url:'https://pennycoreapi.azurewebsites.net/Auction/GetAuctions?state=ACTIVE&category=edf78def-783b-459f-83dd-013f10c1e79f',
+					url:'http://127.0.0.1:5000/api/products?state=ACTIVE&category=gadgets',
 					method:'Get',
 					dataType:'json',
 					headers:{
 						'Content-Type':'application/json',
 						'Authorization':outletResponse.token_type+' '+outletResponse.access_token
 					},
-					data:{'state':'ACTIVE','category':'edf78def-783b-459f-83dd-013f10c1e79f'},
+					processData:false,
 					success:function(ResponseBody){
 						console.log(JSON.stringify(ResponseBody));
 						ResponsePC = JSON.parse(JSON.stringify(ResponseBody));
 						localStorage.products=JSON.stringify(ResponseBody);
 						$('#content').empty();
 						var i = 0;
-						
+
 						for (var key in ResponsePC) {
 						    if (ResponsePC.hasOwnProperty(key)) {
 						        i+=1;
@@ -357,13 +365,13 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 				});
 			}
 		});
-		
+
 		var BalanceD;
 		var BonusD;
 
 		//for the DWallet details
         $.ajax({
-            url:'https://pennycoreapi.azurewebsites.net/Dwallet/GetWallet',
+            url:'http://127.0.0.1:5000/api/wallet',
             method:'Get',
             dataType:'json',
             processData:false,
@@ -379,26 +387,26 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
                 $('#ErrorM').modal('show');
             }
         });
-		
+
 		//for getting id of the button clicked
 		jQuery(document).delegate("#content button[type='button']","click",function(event){
 			event.preventDefault();
-			
-			
-			
+
+
+
 			BtnId=$(this).attr('id');
 			price=$(this).attr('name');
 
 			console.log(BtnId);
-			
+
 			if (confirmEmail == false) {
-				
+
 			    $('#errorMSG').html("visit your Email address to confirm Your Email and enjoy Bidding.");
 			    $('#ErrorM').modal('show');
 				return false;
 			}
 			else if (confirmPnum == false) {
-				
+
 			    $("#TopupAmt").modal('show');
 				return false;
 			}
@@ -428,7 +436,7 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 			            $('#errorMSG').html("You are low on Denaries.Please top up to continue");
 			            $('#ErrorM').modal('show');
 						$('#TopupAmt').modal('show');
-			            
+
 			            return false;
 			        }
 			        else if (Amount < price) {
@@ -439,19 +447,19 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 			            return false;
 			        }
 
-					
+
 					$('#bidmountM').modal('hide');
 			        $.ajax({
-			            url: 'https://pennycoreapi.azurewebsites.net/Bids/PlaceBid',
+			            url: 'http://127.0.0.1:5000/api/bid',
 			            method: 'Post',
 			            dataType: 'json',
 			            data: "{ 'amount':'"+Amount+"', 'auctionId':'"+BtnId+"' }",
 			            success: function (ResponseBody) {
 			                console.log(JSON.stringify(ResponseBody));
-							
+
 			                //To update the Dwallet
 			                $.ajax({
-								url:'https://pennycoreapi.azurewebsites.net/Dwallet/GetWallet',
+								url:'http://127.0.0.1:5000/api/wallet',
 								method:'Get',
 								dataType:'json',
 								processData:false,
@@ -463,7 +471,7 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 								},
 								error:function(error){
 									console.log(JSON.stringify(error));
-									
+
 								},
 			                    complete: function () {
 			                        $('#successMSG').html("Bid placed successfully.You can now check your bid ranking");
@@ -479,7 +487,7 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 			            },
 			            error: function (error) {
 			                console.log(JSON.stringify(error));
-							
+
 							$('#bidmountM').modal('hide');
 							$('#'+BtnId).removeClass('disabled');
 							$('#'+BtnId).html('Bid Now');
@@ -492,15 +500,15 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 			        });
 
 			    });
-			
+
 
 		//for the get bid Rank
 		jQuery(document).delegate("#content button[type='Rank']","click",function(event){
 			BtnId=$(this).attr('id');
-			
+
 			event.preventDefault();
 			$.ajax({
-				url:'https://pennycoreapi.azurewebsites.net/Auction/GetBidderRanking?auctionId='+BtnId,
+				url:'http://127.0.0.1:5000/api/bid?auctionId='+BtnId,
 				method:'GET',
 				headers:{'Authorization':sessionStorage.type+' '+sessionStorage.Osession},
 				dataType:'json',
@@ -521,7 +529,7 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 								else{
 									$("#bidRankContent").append('<div class="row"><div class="col-3 col-sm-3 col-md-3 col-lg-3 text-center"><img src="img/images.png" alt="user image" width="50px" height="50px"></div><div class="col-3 col-sm-3 col-md-3 col-lg-3 text-dark"><b>'+ResponsePC[i].userName+'</b></div><div class="col-6 col-sm-6 col-md-6 col-lg-6"><div class="progress style="height:40px;"><div class="progress-bar bg-danger" style="width:'+ResponsePC[i].totalBids+';">'+ResponsePC[i].totalBids+'Denari</div></div></div></div><hr>');
 								}
-						
+
 					}
 
 					$("#BidRank").modal('show');
@@ -531,41 +539,41 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 				    $('#errorMSG').html("An Error occured, Please try again later.");
 				    $('#ErrorM').modal('show');
 				}
-				
+
 			});
 
-			
+
 		});
-		
+
 		var btnId;
 		var AmountP;
-		
+
 		//for the my bid rank
 		$("#MybidR").click(function(event){
 			event.preventDefault();
-			
+
 			$.ajax({
-				url:'https://pennycoreapi.azurewebsites.net/Auction/MyBidRanking?auctionId='+BtnId,
+				url:'http://127.0.0.1:5000/api/account',
 				method:'POST',
 				dataType:'json',
 				data:{'auctionId':BtnId},
 				success:function(ResponseBody){
 					console.log(JSON.stringify(ResponseBody));
-					
+
 					var ResponseT=JSON.parse(JSON.stringify(ResponseBody));
 					$("#Runame").html(ResponseT.userName);
 					$("#Rtb").html(ResponseT.totalBids);
 					$("#Rpos").html(ResponseT.position);
-					
+
 					for (var key in ResponseT.bids) {
 						if (ResponseT.bids.hasOwnProperty(key)) {
 							btnId=ResponseT.bids[key].id;
-							
+
 							AmountP=ResponseT.bids[key].amount;
 						}
 					}
 					$('.PBbtn').attr('id',btnId);
-					
+
 					$("#BidRank").modal('hide');
 					$("#MyRank").modal('show');
 				},
@@ -577,16 +585,16 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 				}
 			});
 		});
-		
+
 		//for the get statement
 		$("#Getstatembtn").click(function(event){
 			event.preventDefault();
-			
+
 			var dateStart=$('#fromDate').val();
 			var dateEnd=$('#EndDate').val();
-			
+
 			$.ajax({
-				url:'https://pennycoreapi.azurewebsites.net/DWallet/GetStatement',
+				url:'http://127.0.0.1:5000/api/account',
 				method:'GET',
 				dataType:'json',
 				data:{'dateRange.start':dateStart,'dateRange.end':dateEnd},
@@ -594,7 +602,7 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 					console.log(JSON.stringify(Response));
 					$("getStatmentC").empty();
 					$("#getStatmentF").empty();
-					
+
 					for (var key in Response) {
 							if (Response.hasOwnProperty(key)) {
 								$("#getStatmentC").append('<ol style="list-style-type:circle;"><li><i>timestamp</i> <span class="fa fa-angle-double-right"></span> <i id="">'+Response[key].timestamp+'</i></li><li><i>TransactionRef</i> <span class="fa fa-angle-double-right"></span> <i id="">'+Response[key].transactionRef+'</i></li><li><i>Amount</i> <span class="fa fa-angle-double-right"></span> <i id="">'+Response[key].amount+'</i></li><li><i>Amount(KES)</i> <span class="fa fa-angle-double-right"></span> <i id="">'+Response[key].amountInKES+'</i></li><li><i>Type</i> <span class="fa fa-angle-double-right"></span> <i id="">'+Response[key].type+'</i></li><li><i>Details</i> <span class="fa fa-angle-double-right"></span> <i id="">'+Response[key].details+'</i></li></ol>');
@@ -609,11 +617,11 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 				}
 			});
 		});
-		
+
 		var Bids;
 		var AuctID;
-		
-		
+
+
 				//for the promote bid
 			$('#BPAbtn').click(function (event) {
 			    event.preventDefault();
@@ -637,9 +645,9 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 			        $('#ErrorM').modal('show');
 			        return false;
 				}
-				
+
 			    else {
-			        
+
 
 			        var NewBid = AmountP * times;
 
@@ -651,7 +659,7 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 			            $('#errorMSG').html("You are low on Denaries.Please top up to continue");
 			            $('#ErrorM').modal('show');
 						$('#TopupAmt').modal('show');
-			            
+
 			            return false;
 			        }
 					else {
@@ -669,41 +677,41 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 									$('#BPromote').modal('hide');
 			                        $('#successMSG').html("Bid Promoted successfully.\n You can now check your new bid ranking.");
 			                        $('#SuccessM').modal('show');
-									
+
 									//To update my bid rank
 									$.ajax({
-										url:'https://pennycoreapi.azurewebsites.net/Auction/MyBidRanking?auctionId='+BtnId,
+										url:'http://127.0.0.1:5000/api/bid',
 										method:'POST',
 										dataType:'json',
 										data:{'auctionId':BtnId},
 										success:function(ResponseBody){
 											console.log(JSON.stringify(ResponseBody));
-					
+
 											var ResponseT=JSON.parse(JSON.stringify(ResponseBody));
 											$("#Runame").html(ResponseT.userName);
 											$("#Rtb").html(ResponseT.totalBids);
 											$("#Rpos").html(ResponseT.position);
-					
+
 											for (var key in ResponseT.bids) {
 												if (ResponseT.bids.hasOwnProperty(key)) {
 													btnId=ResponseT.bids[key].id;
-							
+
 													AmountP=ResponseT.bids[key].amount;
 												}
 											}
 											$('.PBbtn').attr('id',btnId);
-					
+
 											$("#MyRank").modal('show');
 										},
 										error:function(error){
 											console.log(JSON.stringify(error));
-											
+
 										}
 									});
-									
+
 									//To udate the Dwallet
 									$.ajax({
-										url:'https://pennycoreapi.azurewebsites.net/Dwallet/GetWallet',
+										url:'http://127.0.0.1:5000/api/wallet',
 										method:'Get',
 										dataType:'json',
 										processData:false,
@@ -715,7 +723,7 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 										},
 										error:function(error){
 											console.log(JSON.stringify(error));
-											
+
 										}
 									});
 			                    },
@@ -735,7 +743,7 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 			        }
 			    }
 			});
-		
+
             //On focus auto complete phonenumber
 			$('#TopupPN').focus(function () {
 			    var PN = $('#PNum').html();
@@ -743,7 +751,7 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 			        $("#TopupPN").val(PN);
 			    }
 			});
-			
+
 
         //for the Dwallet topup button
                 $('#TopupBtn').click(function (event) {
@@ -755,14 +763,14 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 
                         if (Amount == ""||Phonenumber=="") {
 							$('#TopupAmt').modal('hide');
-							
+
                             $('#errorMSG').html("please fill in all values!");
                             $('#ErrorM').modal('show');
                             return false;
                         }
                         else if (Amount <= 10) {
 							$('#TopupAmt').modal('hide');
-							
+
                             $('#errorMSG').html("Amount must be greater than 10!");
                             $('#ErrorM').modal('show');
                             return false;
@@ -777,34 +785,34 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 
 
                         $.ajax({
-                            url: "https://pennycoreapi.azurewebsites.net/DWallet/Topup",
+                            url: "http://127.0.0.1:5000/api/wallet",
                             method: 'Post',
                             dataType: 'json',
                             data: JSON.stringify({ 'amount': Amount, 'phoneNumber': PhoneNumber }),
                             success: function (ResponseBody) {
                                 console.log(JSON.stringify(ResponseBody));
-                                
+
                                 $('#successMSG').html("success!wait for mpesa popup.");
                                 $('#SuccessM').modal('show');
-								
-								
+
+
                             },
                             error: function (error) {
                                 console.log(JSON.stringify(error));
-								
+
                                 $('#errorMSG').html("Failed!please try again later");
                                 $('#ErrorM').modal('show');
                             },
                             complete: function () {
-                                $('#TopupAmt').modal('hide');	
-                                
+                                $('#TopupAmt').modal('hide');
+
                             }
 
                         });
-            
+
                 });
-           
-        
+
+
          //for the view old password
         $('#OPV').click(function(event){
 			event.preventDefault();
@@ -838,16 +846,16 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 				$('#conP').attr('type','password');
 			}
 		});
-        
+
 
 		//for the change password button
 		$('#SubmitCP').click(function(event){
 			event.preventDefault();
-			
+
 			var oldPassword=$('#oldP').val();
 			var newPassword=$('#NewP').val();
 			var confirmPassword=$('#conP').val();
-			
+
 			if(confirmPassword !==newPassword){
 				$('#errorMSG').html("Password does not match!");
 				$('#ErrorM').modal('show');
@@ -865,13 +873,13 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 			            if (numberValid) {
 			                var symbolValid = symbolValidator(newPassword);
 			                if (symbolValid) {
-								
+
 								$('#SubmitCP').addClass('disabled');
 								$('#SubmitCP').html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>');
 
 			                    $.ajax({
-									url:'https://pennycoreapi.azurewebsites.net/api/Account/changePassword',
-									method:'Put',
+									url:'http://127.0.0.1:5000/api/changePassword',
+									method:'PUT',
 									dataType:'json',
 									data:JSON.stringify({'oldPassword':oldPassword,'newPassword':newPassword,'confirmPassword':confirmPassword}),
 									success:function(ResponseBody){
@@ -913,14 +921,13 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 			    $('#PwordL').focus();
 			    return false;
 			}
-			
+
 		});
 
 		//for the register additional info
 		$('#addInfo').click(function(){
 			event.preventDefault();
-			var firstName=$('#FName').val();
-			var lastName=$('#LName').val();
+
 			var middleName=$('#MName').val();
 			var nickName=$('#NickName').val();
 			var phoneNumber = $('#PNumI').val();
@@ -936,10 +943,10 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 			$('#addInfo').addClass('disabled');
 			$('#addInfo').html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>');
 			$.ajax({
-				url:'https://pennycoreapi.azurewebsites.net/api/Account/RegisterAdditionalInfo',
-				method:'Post',
+				url:'http://127.0.0.1:5000/api/accontInfo',
+				method:'PUT',
 				dataType:'json',
-				data:JSON.stringify({'firstName':firstName,'lastName':lastName,'middleName':middleName,'nickName':nickName,'phoneNumber':phoneNumber,'idNumber':idNumber,'dob':dob,'gender':gender}),
+				data:JSON.stringify({'middleName':middleName,'nickName':nickName,'phoneNumber':phoneNumber,'idNumber':idNumber,'dob':dob,'gender':gender}),
 				success:function(ResponseBody){
 				    console.log(JSON.stringify(ResponseBody));
 					$('#addInfo').removeClass('disabled');
@@ -958,13 +965,13 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 					$('#Reginfor').modal('hide');
 					//To update the account information
 					$.ajax({
-						url:'https://pennycoreapi.azurewebsites.net/api/Account/UserInfo',
+						url:'http://127.0.0.1:5000/api/accontInfo',
 						method:'Get',
 						dataType:'json',
 						processData:false,
 						success:function(ResponseBody){
 							console.log(JSON.stringify(ResponseBody));
-			
+
 							var Name = ResponseBody.name;
 							$("#name").html(Name);
 							var Nickname = ResponseBody.nickname;
@@ -991,33 +998,33 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 								$("#CE").html("<span class='fa fa-check'></span>");
 							} else {
 								$("#CE").html("<span class='fa fa-close'></span>");
-			
+
 							}
 							if (ResponseBody.phoneNumberConfirmed) {
 								$("#CP").html("<span class='fa fa-check'></span>");
-			
+
 							} else {
 								$("#CP").html("<span class='fa fa-close'></span>");
 								$("#bonusL").html("<span class='fa fa-lock'></span>");
 							}
-			
+
 						},
 						error:function(error){
 							console.log(JSON.stringify(error));
-							
+
 						}
 					});
 				}
 			});
 		});
 
-	
+
 
 	//Acution products Active
 	$("#LiveA").click(function(event){
 		event.preventDefault();
 	$.ajax({
-					url:'https://pennycoreapi.azurewebsites.net/Auction/GetAuctions?state=ACTIVE',
+					url:'http://127.0.0.1:5000/api/products?state=ACTIVE&category=gadgets',
 					method:'Get',
 					dataType:'json',
 					headers:{
@@ -1073,14 +1080,14 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 	$("#ClosedA").click(function(event){
 		event.preventDefault();
 	$.ajax({
-					url:'https://pennycoreapi.azurewebsites.net/Auction/GetAuctions?state=CLOSED&category=edf78def-783b-459f-83dd-013f10c1e79f',
+					url:'http://127.0.0.1:5000/api/products?state=CLOSED&category=gadgets',
 					method:'Get',
 					dataType:'json',
 					headers:{
 						'Content-Type':'application/json',
 						'Authorization':sessionStorage.type+' '+sessionStorage.Osession
 					},
-					data:{'state':'CLOSED','category':'edf78def-783b-459f-83dd-013f10c1e79f'},
+					processData:false,
 					success:function(ResponseBody){
 						console.log(JSON.stringify(ResponseBody));
 						$("#content").empty();
@@ -1089,7 +1096,7 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 						var i = 0;
 						for (var key in ResponsePC) {
 						    if (ResponsePC.hasOwnProperty(key)) {
-								
+
 								i++;
 								//if(i>5){
 								//	break;
@@ -1122,13 +1129,13 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 				window.location="/";
 			}
 	});
-	
+
 	//function closed alert
 	function ClosedAlert() {
 	    $('#errorMSG').html("This Auction is closed.\nCheck the Live Auctions and bid on them.");
 	    $('#ErrorM').modal('show');
 	}
-	
+
 	//For the show image to upload
 	$("#UPpic").on('change',function(){
 		var imgPath=$(this)[0].value;
@@ -1137,14 +1144,14 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 		image_holder.empty();
 		if(extn=="gif"||extn=="png"||extn=="jpg"||extn=="jpeg"){
 			if(typeof(FileReader)!="undefined"){
-				
+
 					var reader=new FileReader();
 					reader.onload=function(e){
 						$("<img />",{"src":e.target.result,"class":"img-thumbnail","width":"200px","height":"200px"}).appendTo(image_holder);
 					}
 					image_holder.show();
 					reader.readAsDataURL($(this)[0].files[0]);
-				
+
 			}
 		}
 		else{
@@ -1155,15 +1162,19 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 	//start the upload
 	$("#UdpBtn").click(function(event){
 		event.preventDefault();
+		console.log($("#UPpic")[0].value);
 		var image = $("#UPpic")[0].files[0];
 		var form_data = new FormData();
 		form_data.append("image",image);
+		form_data.append('test','test');
 
+		delete $.ajaxSettings.headers["Content-Type"];
 		$.ajax({
-			url:'https://pennycoreapi.azurewebsites.net/api/Account/UpdateProfilePic',
+			url:'http://127.0.01:5000/api/uploadPic',
 			type:'POST',
 			data:form_data,
 			cache:false,
+			encrypt: 'multipart/form-data',
 			contentType:false,
 			processData:false,
 			success:function(ResponseBody){
@@ -1171,13 +1182,13 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 
 				//To update the account information
 				$.ajax({
-					url:'https://pennycoreapi.azurewebsites.net/api/Account/UserInfo',
+					url:'http://127.0.0.1:5000/api/accontInfo',
 					method:'Get',
 					dataType:'json',
 					processData:false,
 					success:function(ResponseBody){
 						console.log(JSON.stringify(ResponseBody));
-		
+
 						var Name = ResponseBody.name;
 						$("#name").html(Name);
 						var Nickname = ResponseBody.nickname;
@@ -1204,20 +1215,20 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 							$("#CE").html("<span class='fa fa-check'></span>");
 						} else {
 							$("#CE").html("<span class='fa fa-close'></span>");
-		
+
 						}
 						if (ResponseBody.phoneNumberConfirmed) {
 							$("#CP").html("<span class='fa fa-check'></span>");
-		
+
 						} else {
 							$("#CP").html("<span class='fa fa-close'></span>");
 							$("#bonusL").html("<span class='fa fa-lock'></span>");
 						}
-		
+
 					},
 					error:function(error){
 						console.log(JSON.stringify(error));
-						
+
 					}
 				});
 
@@ -1249,8 +1260,8 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
         }
         $('#Msend').addClass('disabled');
         $('#Msend').html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>');
-       
-        
+
+
                 $.ajax({
                     url: 'https://pennycoreapi.azurewebsites.net/api/Account/SendEmail',
                     method: 'POST',

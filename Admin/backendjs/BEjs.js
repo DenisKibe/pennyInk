@@ -1,6 +1,6 @@
 
 	$(document).ready(function(){
-	
+
         if ((sessionStorage.getItem('Osession') === null || sessionStorage.getItem('Osession')=="undefined")) {
 
             window.location = "/Admin";
@@ -10,10 +10,10 @@
             'Authorization':sessionStorage.Otype+' '+sessionStorage.Osession
         }
     });
-	
+
 	//for the Get outlet account info
 	$.ajax({
-            url:'https://pennycoreapi.azurewebsites.net/api/Account/UserInfo',
+            url:'http://127.0.0.1:5000/api/accontInfo',
             method:'Get',
             dataType:'json',
             processData:false,
@@ -35,7 +35,7 @@
 
                     setTimeout(function(){window.location=("/Admin");},3000);
                 }
-                
+
             },
             error:function(error){
                 console.log(JSON.stringify(error));
@@ -43,7 +43,7 @@
                 $('#ErrorM').modal('show');
             }
         });
-		
+
 		//for the log out
 		$("#logout").click(function(event){
 			event.preventDefault();
@@ -55,9 +55,9 @@
 			    $('#successMSG').html("Thank you for Visiting.");
 			    $('#SuccessM').modal('show');
 				window.location=("/");
-			}	
+			}
 		});
-		
-		
-		
+
+
+
 	});

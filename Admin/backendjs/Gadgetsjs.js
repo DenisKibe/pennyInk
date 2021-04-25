@@ -8,22 +8,22 @@
 	var pid;
 	var pname;
 	var BtnId;
-	
-	
+
+
 	$.ajaxSetup({
         headers:{
             'Authorization':sessionStorage.Otype+' '+sessionStorage.Osession
         }
     });
-	
+
 
 	    //for the Live Auctions
-    
+
         $.ajax({
-            url: 'https://pennycoreapi.azurewebsites.net/Auction/GetAuctions?state=ACTIVE&category=edf78def-783b-459f-83dd-013f10c1e79f',
+            url: 'http://127.0.0.1:5000/api/products?state=ACTIVE&category=gadgets',
             method: 'Get',
             dataType: 'json',
-            data: 'state' + '=' + 'ACTIVE'+'&'+'category'+'='+'edf78def-783b-459f-83dd-013f10c1e79f',
+            data: false,
             success: function (ResponseBody) {
                 console.log(JSON.stringify(ResponseBody));
                 $("#content").empty();
@@ -33,18 +33,18 @@
 
                     if (ResponsePC.hasOwnProperty(key)) {
                         i++;
-                        $("#content").append('<div class="col-lg-4 col-md-6 col-sm-6 c0l-12 mb-lg-0 mb-4 "><div class="card mb-3 text-center hoverable wow rotateIn" data-wow-delay="1.0"><div class="view view-cascade overlay"><!--featured image--><div class="view overlay"><img src="' + ResponsePC[key].imageUrl + '" class="img-fluid" alt="' + ResponsePC[key].name + '" /><a><div class="mask rgba-white-slight"></div></a></div></div><!--Excerpt--><div class="card-body"><h4 class="mb-4"><strong>' + ResponsePC[key].name + '</strong></h4><p> <a class="lead" data-toggle="collapse" href="#Description' + i + '" aria-expanded="false" aria-controls="Description">Description <span class="fa fa-angle-down"></span></a><!--collapse element--><div class="collapse" id="Description' + i + '" ><div class="mt-3 mb-2">' + ResponsePC[key].description + '</div></div></p><p class="lead "><span class="mr-2"><del>KSh ' + ResponsePC[key].retailPrice + '</del></span><span class="font-weight-bold text-info">' + ResponsePC[key].auctionPrice + '</span> Denaris</p><h5 class="font-weight-bold text-center text-default"><strong><span class="fa fa-clock-o"></span>' + ResponsePC[key].expiryDate + '</strong></h5><button type="Rank" class="btn btn-primary float-right" data-toggle="modal" id="' + ResponsePC[key].id + '"><span class="fa fa-bar-chart"></span></button><button type="button" class="btn btn-outline-primary btn-md float-left" data-toggle="modal" data-target="#EdModal" id="' + ResponsePC[key].id + '" name="' + ResponsePC[key].imageUrl + '">Edit Auction</button></div></div></div>');
+                        $("#content").append('<div class="col-lg-4 col-md-6 col-sm-6 c0l-12 mb-lg-0 mb-4 "><div class="card mb-3 text-center hoverable wow rotateIn" data-wow-delay="1.0"><div class="view view-cascade overlay"><!--featured image--><div class="view overlay"><img src="' + ResponsePC[key].imageUrl + '" class="img-fluid" alt="' + ResponsePC[key].name + '" /><a><div class="mask rgba-white-slight"></div></a></div></div><!--Excerpt--><div class="card-body"><h4 class="mb-4"><strong>' + ResponsePC[key].name + '</strong></h4><p> <a class="lead" data-toggle="collapse" href="#Description' + i + '" aria-expanded="false" aria-controls="Description">Description <span class="fa fa-angle-down"></span></a><!--collapse element--><div class="collapse" id="Description' + i + '" ><div class="mt-3 mb-2">' + ResponsePC[key].description + '</div></div></p><p class="lead "><span class="mr-2"><del>KSh yy </del></span><span class="font-weight-bold text-info">xx</span> Denaris</p><h5 class="font-weight-bold text-center text-default"><strong><span class="fa fa-clock-o"></span>' + ResponsePC[key].expiryDate + '</strong></h5><button type="Rank" class="btn btn-primary float-right" data-toggle="modal" id="' + ResponsePC[key].id + '"><span class="fa fa-bar-chart"></span></button><button type="button" class="btn btn-outline-primary btn-md float-left" data-toggle="modal" data-target="#EdModal" id="' + ResponsePC[key].id + '" name="' + ResponsePC[key].imageUrl + '">Edit Auction</button></div></div></div>');
                     }
                 }
-                
+
             },
             error: function (error) {
                 console.log(JSON.stringify(error));
-                
+
             }
         });
-    
-    
+
+
 	//for the create Auctions
     $('#actionC').click(function(){
         event.preventDefault();
@@ -61,15 +61,13 @@
 		form_data.append("name",name);
 		form_data.append("description",description);
 		form_data.append("retailPrice",retailPrice);
-		form_data.append("state","");
-		form_data.append("productCategoryId",'edf78def-783b-459f-83dd-013f10c1e79f');
-		form_data.append("productCategory",pname);
-		form_data.append("imageUrl","");
+		form_data.append("state","ACTIVE");
+		form_data.append("productCategory",'gadgets');
 		form_data.append("expiryDate",expiryDate);
-    
- 
+
+
 		$.ajax({
-			url:'https://pennycoreapi.azurewebsites.net/Auction/Create',
+			url:'http://127.0.0.1:5000/api/products',
 			type:'post',
 			data:form_data,
 			cache:false,
@@ -91,13 +89,13 @@
 			    $('#errorMSG').html("Failed.Please try again later");
 			    $('#ErrorM').modal('show');
 			}
-        
+
 		});
 	});
-	
+
 	//for the Get outlet account info
 	$.ajax({
-            url:'https://pennycoreapi.azurewebsites.net/api/Account/UserInfo',
+            url:'http://127.0.0.1:5000/api/accontInfo',
             method:'Get',
             dataType:'json',
             processData:false,
@@ -112,7 +110,7 @@
                 $("#uId").html(ResponseBody.uId);
                 $("#role").html(ResponseBody.role);
                 $("#Oid").html(ResponseBody.outletId);
-                
+
             },
             error:function(error){
                 console.log(JSON.stringify(error));
@@ -120,7 +118,7 @@
                 $('#ErrorM').modal('show');
             }
         });
-		
+
 		//for the log out
 		$("#logout").click(function(event){
 			event.preventDefault();
@@ -132,15 +130,15 @@
 			    $('#successMSG').html("Thank you for Visiting.");
 			    $('#SuccessM').modal('show');
 				window.location=("/");
-			}	
+			}
 		});
-		
-		
+
+
 		//for the Auction id of the click button to view bidRanks for users
 		jQuery(document).delegate("#content button[type='Rank']","click",
 		function(event){
 			BtnId=$(this).attr('id');
-			
+
 			//for geting the bid ranks for live Auctions
 			event.preventDefault();
 			$.ajax({
@@ -163,10 +161,10 @@
 				    $('#errorMSG').html("An Error occured, Please try again later.");
 				    $('#ErrorM').modal('show');
 				}
-			});	
+			});
 		});
-		
-		
+
+
 		//for the navigation link to get Live Auctions
 		$("#LiveA").click(function(event){
 			event.preventDefault();
@@ -181,7 +179,7 @@
 						ResponsePC = JSON.parse(JSON.stringify(ResponseBody));
 						var i = 0;
 						for (var key in ResponsePC) {
-						    
+
 							if (ResponsePC.hasOwnProperty(key)) {
 							    i++;
 							    $("#content").append('<div class="col-lg-4 col-md-6 col-sm-6 c0l-12 mb-lg-0 mb-4 "><div class="card mb-3 text-center hoverable wow rotateIn" data-wow-delay="1.0"><div class="view view-cascade overlay"><!--featured image--><div class="view overlay"><img src="' + ResponsePC[key].imageUrl + '" class="img-fluid" alt="' + ResponsePC[key].name + '" /><a><div class="mask rgba-white-slight"></div></a></div></div><!--Excerpt--><div class="card-body"><h4 class="mb-4"><strong>' + ResponsePC[key].name + '</strong></h4><p> <a class="lead" data-toggle="collapse" href="#Description' + i + '" aria-expanded="false" aria-controls="Description">Description <span class="fa fa-angle-down"></span></a><!--collapse element--><div class="collapse" id="Description' + i + '" ><div class="mt-3 mb-2">' + ResponsePC[key].description + '</div></div></p><p class="lead "><span class="mr-2"><del>KSh ' + ResponsePC[key].retailPrice + '</del></span><span class="font-weight-bold text-info">' + ResponsePC[key].auctionPrice + '</span> Denaris</p><h5 class="font-weight-bold text-center text-default"><strong><span class="fa fa-clock-o"></span>' + ResponsePC[key].expiryDate + '</strong></h5><button type="Rank" class="btn btn-primary float-right" data-toggle="modal" id="' + ResponsePC[key].id + '"><span class="fa fa-bar-chart"></span></button><button type="button" class="btn btn-outline-primary btn-md float-left" data-toggle="modal" data-target="#EdModal" id="' + ResponsePC[key].id + '" name="' + ResponsePC[key].imageUrl + '">Edit Auction</button></div></div></div>');
@@ -197,7 +195,7 @@
 					}
 			});
 		});
-		
+
 		//for the navigation link to get Closed Auctions
 		$("#ClosedA").click(function(event){
 			event.preventDefault()
@@ -212,7 +210,7 @@
 						ResponsePC = JSON.parse(JSON.stringify(ResponseBody));
 						var i = 0;
 						for (var key in ResponsePC) {
-						    
+
 							if (ResponsePC.hasOwnProperty(key)) {
 							    i++;
 							    $("#content").append('<div class="col-lg-4 col-md-6 col-sm-6 c0l-12 mb-lg-0 mb-4 "><div class="card mb-3 text-center hoverable wow rotateIn" data-wow-delay="1.0"><div class="view view-cascade overlay"><!--featured image--><div class="view overlay"><img src="' + ResponsePC[key].imageUrl + '" class="img-fluid" alt="' + ResponsePC[key].name + '" /><a><div class="mask rgba-white-slight"></div></a></div></div><!--Excerpt--><div class="card-body"><h4 class="mb-4"><strong>' + ResponsePC[key].name + '</strong></h4><p> <a class="lead" data-toggle="collapse" href="#Description' +i+ '"  aria-expanded="false" aria-controls="Description">Description <span class="fa fa-angle-down"></span></a><!--collapse element--><div class="collapse" id="Description' +i+ '" ><div class="mt-3 mb-2">' + ResponsePC[key].description + '</div></div></p><p class="lead "><span class="mr-2"><del>KSh ' + ResponsePC[key].retailPrice + '</del></span><span class="font-weight-bold text-info">' + ResponsePC[key].auctionPrice + '</span> Denaris</p><h5 class="font-weight-bold text-center text-default"><strong><span class="fa fa-clock-o"></span>' + ResponsePC[key].expiryDate + '</strong></h5><button type="Rank" class="btn btn-primary btn-md float-right" data-toggle="modal" id="' + ResponsePC[key].id + '"><span class="fa fa-bar-chart"></span></button><button type="button" class="btn btn-outline-primary btn-md float-left" data-toggle="modal" data-target="#EdModal" id="' + ResponsePC[key].id + '" name="' + ResponsePC[key].imageUrl + '">Edit Auction</button></div></div></div>');
@@ -228,7 +226,7 @@
 					}
 		});
 		});
-		
+
 		//To get the image url and id of the product to edit
 		var ImgUrl;
 		jQuery(document).delegate("#content button[type='button']","click",
@@ -244,12 +242,12 @@
 			var retailPrice=$('#retailP').val();
 			var state=$('#state').val();
 			var expiryDate=$('#Exdate').val()+' '+$('#Extime').val();
-			
+
 			$.ajax({
 				url:'https://pennycoreapi.azurewebsites.net/Auction/Edit',
 				method:'Put',
 				dataType:'json',
-				data:{'id':BtnId,'name':name,'description':description,'retailPrice':retailPrice,'imageUrl':ImgUrl,'productCategoryId':pid,'state':state,'expiryDate':expiryDate},
+				data:{'id':BtnId,'name':name,'description':description,'retailPrice':retailPrice,'state':state,'expiryDate':expiryDate},
 				success:function(ResponseBody){
 				    console.log(JSON.stringify(ResponseBody));
 				    $('#successMSG').html("Product has been Edited successfully");
@@ -293,4 +291,3 @@
 			});
 		});
 	});
-

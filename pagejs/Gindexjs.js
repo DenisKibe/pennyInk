@@ -1,5 +1,5 @@
 
-sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX19db19/l9WrPhELJLZW74bbvw0dZC3ilW1RG4fISbLIAgo3nllBAVcQ";var OutAuthN;sessionStorage.OPass="U2FsdGVkX1+tg2/0WmWeVXDcQbAHi/p3PcTpVoEJaUk=";sessionStorage.ONameEn="1z2y3x4w5v";
+sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX1/mOpstMQvax8KGHq1mRI2cQImKFsoWiZg=";var OutAuthN;sessionStorage.OPass="U2FsdGVkX19sqkGQ+ygRohHIbzxGq03NfiWCxp6sCf4=";sessionStorage.ONameEn="1z2y3x4w5v";
 
 //for the timer
 (function ( $ ) {
@@ -8,7 +8,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 	}
 
 	$.fn.showclock = function(Year,Month,Day,Hour,Mins,Sec) {
-	    
+
 	    var currentDate=new Date();
 	    //var fieldDate=$(this).data('date').split('-');
 	    var futureDate=new Date(Year,Month,Day,Hour,Mins,Sec);
@@ -21,26 +21,26 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 
 	    var days=Math.floor(seconds/86400);
 	    seconds=seconds%86400;
-	    
+
 	    var hours=Math.floor(seconds/3600);
 	    seconds=seconds%3600;
 
 	    var minutes=Math.floor(seconds/60);
 	    seconds=Math.floor(seconds%60);
-	    
+
 	    var html="";
 
 	    if(days!=0){
 		    html+="<span class='countdown-value days-bottom'>"+pad(days)+"d:</span>";
-		   
+
 		}
 
 	    html+="<span class='countdown-value hours-bottom'>"+pad(hours)+"h:</span>";
-	    
+
 	    	html+="<span class='countdown-value minutes-bottom'>"+pad(minutes)+"m:</span>";
-	    
+
 	    	html+="<span class='countdown-value seconds-bottom'>"+pad(seconds)+"s</span>";
-	   
+
 
 	    this.html(html);
 	};
@@ -49,9 +49,9 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 		var el=$(this);
 		el.showclock(Year,Month,Day,Hour,Mins,Sec);
 		setInterval(function(){
-			el.showclock(Year,Month,Day,Hour,Mins,Sec);	
+			el.showclock(Year,Month,Day,Hour,Mins,Sec);
 		},1000);
-		
+
 	}
 
 }(jQuery));
@@ -120,26 +120,28 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 	if (sessionStorage.getItem('session') != null && sessionStorage.getItem('session')!="undefined") {
 		window.location = "productPage.html";
 	}
-	
-	
+
+
 	$(document).ready(function(){
-	
+
 		var outletResponse;
 		var userResponse;
 		var pname;
 		OutAuthN=CryptoJS.AES.decrypt(sessionStorage.OName,sessionStorage.ONameEn).toString(CryptoJS.enc.Utf8);
+
 		OutAuthP=CryptoJS.AES.decrypt(sessionStorage.OPass,sessionStorage.OPassEn).toString(CryptoJS.enc.Utf8);
-		
+
+
 		//for the products in the splash screen
 		$.ajax({
-			url:"https://pennycoreapi.azurewebsites.net/oAuth2/GetToken",
+			url:"http://127.0.0.1:5000/api/auth/getToken",
 
 			method:'POST',
 			dataType:'json',
 			headers:{
 				'Content-Type':'application/json'
 			},
-			data:JSON.stringify({'username':OutAuthN,'password':OutAuthP}),
+			data:JSON.stringify({'email':OutAuthN,'password':OutAuthP}),
 			success:function(ResponseBody){
 
                 outletResponse =JSON.parse(JSON.stringify(ResponseBody));
@@ -150,16 +152,16 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 				console.log(JSON.stringify(error));
 			},
 			complete:function(){
- 
+
 				$.ajax({
-				    url: 'https://pennycoreapi.azurewebsites.net/Auction/GetAuctions?state=ACTIVE&category=edf78def-783b-459f-83dd-013f10c1e79f',
+				    url: 'http://127.0.0.1:5000/api/products?state=ACTIVE&category=gadgets',
 					method:'Get',
 					dataType:'json',
 					headers:{
 						'Content-Type':'application/json',
 						'Authorization':outletResponse.token_type+' '+outletResponse.access_token
 					},
-					data:{'state':'ACTIVE','category':'edf78def-783b-459f-83dd-013f10c1e79f'},
+					data:false,
 					success:function(ResponseBody){
 						console.log(JSON.stringify(ResponseBody));
 						ResponsePC = JSON.parse(JSON.stringify(ResponseBody));
@@ -169,11 +171,11 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 						    if (ResponsePC.hasOwnProperty(key)) {
 								z++;
 								var extime;
-									extime=ResponsePC[key].expiryDate;
+									extime=ResponsePC[key].expiry_date;
 									var date;
 									Sep=extime.indexOf('T');
 									date=extime.slice(0,Sep);
-									date=date.split('-');
+									date=date.split(':');
 									var mwaka=date[0];
 									var mwezi=date[1]-1;
 									var siku=date[2];
@@ -189,7 +191,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 									if(expc>newd){
 										continue;
 									}
-						        $("#products").append('<div class="col-lg-4 col-md-6 col-sm-6 c0l-12 mb-lg-3 mb-4 " style="display:flex;"><!--card--><div class="card card-cascade wider pb-2 card-ecommerce wow flipInX" data-wow-delay="1.1" data-toggle="modal" data-target="#modalRform"><!--card image--><div class="view view-cascade overlay"><img src="' + ResponsePC[key].imageUrl + '" alt="' + ResponsePC[key].name + '" class="card-img-top" /><a><div class="mask rgba-white-slight"></div></a></div> <!--card image--><!--card content--><div class="card-body card-body-cascade text-center"><!--Title--> <h4 class="card-title"> <strong> ' + ResponsePC[key].name + '</strong></h4><!--Description--><p class="card-text">' + ResponsePC[key].description + '</p><!--card footer--><hr><div class="px-1"><span class="float-left font-weight-bold"><strong>' + ResponsePC[key].auctionPrice + ' Denari</strong></span><span class="float-right font-weight-bold"><strong id="expire'+z+'"></strong></span></div></div><!--card content--></div><!--card--></div><!--Grid column-->');
+						        $("#products").append('<div class="col-lg-4 col-md-6 col-sm-6 c0l-12 mb-lg-3 mb-4 " style="display:flex;"><!--card--><div class="card card-cascade wider pb-2 card-ecommerce wow flipInX" data-wow-delay="1.1" data-toggle="modal" data-target="#modalRform"><!--card image--><div class="view view-cascade overlay"><img src="' + ResponsePC[key].image_url + '" alt="' + ResponsePC[key].name + '" class="card-img-top" /><a><div class="mask rgba-white-slight"></div></a></div> <!--card image--><!--card content--><div class="card-body card-body-cascade text-center"><!--Title--> <h4 class="card-title"> <strong> ' + ResponsePC[key].name + '</strong></h4><!--Description--><p class="card-text">' + ResponsePC[key].description + '</p><!--card footer--><hr><div class="px-1"><span class="float-left font-weight-bold"><strong>xx Denari</strong></span><span class="float-right font-weight-bold"><strong id="expire'+z+'"></strong></span></div></div><!--card content--></div><!--card--></div><!--Grid column-->');
 								jQuery("#expire"+z).countdown(mwaka,mwezi,siku,saa,dakika,sekunde);
 							}
 						}
@@ -220,15 +222,15 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 				$('#PwordL').val(localStorage.Pword);
 			}
 		});
-		
+
 		//for the login
 		$('#SubmitL').click(function(event){
 			event.preventDefault();
-			var username=$('#Email').val();
+			var email=$('#Email').val();
 			var password=$('#PwordL').val();
 			var Remember=$('#RembMe').prop('checked');
 			var saveD=$('#RembD').prop('checked');
-			if(username==""){
+			if(email==""){
 				$('#errorMSG').html("Please input an email!");
 			    $('#ErrorM').modal('show');
 				$('#Email').focus();
@@ -247,19 +249,19 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 			            if (numberValid) {
 			                var symbolValid = symbolValidator(password);
 			                if (symbolValid) {
-								
+
 								$('#SubmitL').addClass('disabled');
 								$('#SubmitL').html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>');
 
 			                    $.ajax({
-			                        url: "https://pennycoreapi.azurewebsites.net/oAuth2/GetToken",
+			                        url: "http://127.0.0.1:5000/api/auth/getToken",
 
 			                        method: 'POST',
 			                        dataType: 'json',
 			                        headers: {
 			                            'Content-Type': 'application/json'
 			                        },
-			                        data: JSON.stringify({ 'username': username, 'password': password }),
+			                        data: JSON.stringify({ 'email': email, 'password': password }),
 			                        success: function (ResponseBody) {
 
 			                            console.log(JSON.stringify(ResponseBody));
@@ -269,12 +271,12 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 			                                if (typeof (Storage) !== "undefined") {
 			                                    sessionStorage.session = userResponse.access_token;
 			                                    sessionStorage.type = userResponse.token_type;
-												
+
 												if(saveD){
-													localStorage.Uname=username;
+													localStorage.Uname=email;
 													localStorage.Pword=password;
 												}
-													
+
 												if(Remember){
 													localStorage.session=userResponse.access_token;
 													localStorage.type=userResponse.token_type;
@@ -292,7 +294,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 			                                        $('#ErrorM').modal('show');
 			                                        return false;
 			                                    }
-			                                    
+
 			                                } else {
 												$('#SubmitL').removeClass('disabled');
 												$('#SubmitL').html('Log in');
@@ -310,8 +312,8 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 			                        },
 			                        error: function (error) {
 			                            console.log(JSON.stringify(error));
-										$('#SubmitL').removeClass('disabled');
-										$('#SubmitL').html('Log in');
+																	$('#SubmitL').removeClass('disabled');
+																	$('#SubmitL').html('Log in');
 			                            $('#errorMSG').html("Failed!Please try again later.");
 			                            $('#ErrorM').modal('show');
 			                        }
@@ -357,7 +359,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 			}
 			password=$('#PwordS').val();
 			confirmPassword=$('#Cpword').val();
-			
+
 			if (password != confirmPassword) {
 			    $('#errorMSG').html("Password does not much!");
 			    $('#ErrorM').modal('show');
@@ -378,37 +380,37 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 			            if (numberValid) {
 			                var symbolValid = symbolValidator(password);
 			                if (symbolValid) {
-								
+
 								$('#SubmitS').addClass('disabled');
 								$('#SubmitS').html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>');
-			                    
+
 
 			                            var email = $('#EmailS').val();
 			                            var fName = $('#firstname').val();
 			                            var lName = $('#lastname').val();
 
 			                            $.ajax({
-			                                url: "https://pennycoreapi.azurewebsites.net/api/Account/RegisterUser",
+			                                url: "http://127.0.0.1:5000/api/auth/registerUser",
 
 			                                method: 'POST',
 			                                dataType: 'json',
 			                                headers: {
 			                                    'Content-Type': 'application/json',
-			                                    'Authorization':'bearer ' + sessionStorage.Osession
+			                                    'Authorization':'Bearer ' + sessionStorage.Osession
 			                                },
 			                                data: JSON.stringify({ 'email': email, 'fName': fName, 'lName': lName, 'password': password, 'confirmPassword': confirmPassword }),
 			                                success: function (ResponseBody) {
 			                                    console.log(JSON.stringify(ResponseBody));
-												$('#SubmitS').removeClass('disabled');
-												$('#SubmitS').html('Sign up');
+																					$('#SubmitS').removeClass('disabled');
+																					$('#SubmitS').html('Sign up');
 
 			                                    $('#successMSG').html("Success! User is now Registered.\n You can now login.");
 			                                    $('#SuccessM').modal('show');
 			                                },
 			                                error: function (error) {
 			                                    console.log(JSON.stringify(error));
-												$('#SubmitS').removeClass('disabled');
-												$('#SubmitS').html('Sign up');
+																					$('#SubmitS').removeClass('disabled');
+																					$('#SubmitS').html('Sign up');
 
 			                                    var errorState = JSON.parse(JSON.stringify(error));
 			                                    $('#errorMSG').html("Could Not Register User!check if User already Exist.");
@@ -436,7 +438,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 			    return false;
 			}
 
-			
+
 
 		});
 
@@ -444,24 +446,24 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 		$("#changeP").click(function (event) {
 		    event.preventDefault();
 
-		    var username = $('#Email').val();
+		    var email = $('#Email').val();
 
-		    if (username == "") {
+		    if (email == "") {
 		        $('#errorMSG').html("please fill out this field.");
 		        $('#ErrorM').modal('show');
-				
+
 				$("#Email").focus();
-				
-				
+
+
 				return false;
 			}
 			$("#Pm").html("Sending password reset Link..")
 			$("#ProcessM").modal('show');
 			$.ajax({
 				url:"https://pennycoreapi.azurewebsites.net/api/Account/ResetPassword",
-				method:'Put',
+				method:'Post',
 				dataType:'json',
-				data:{'username':username,'resetPasswordEndpoint':'https://www.pennyinc.co.ke/resetPassword.html'},
+				data:{'email':email,'resetPasswordEndpoint':'https://www.pennyinc.co.ke/resetPassword.html'},
 				success:function(ResponseBody){
 				    console.log(JSON.stringify(ResponseBody));
 					$("#ProcessM").modal('hide');
@@ -478,7 +480,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 
 			});
 		});
-		
+
 		//for the view password in login field
 		$('#LPV').click(function(event){
 			event.preventDefault();
@@ -490,7 +492,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 				$('#PwordL').attr('type','password');
 			}
 		});
-		
+
 		//for the view password in sign up field
 		$('#SPV').click(function(event){
 			event.preventDefault();
@@ -513,7 +515,7 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
 				$('#Cpword').attr('type','password');
 			}
         });
-        
+
         //To send emails
     $("#Msend").click(function (event) {
         event.preventDefault();
@@ -530,14 +532,17 @@ sessionStorage.OPassEn="9a8b7c6d5e";var OutAuthP;sessionStorage.OName="U2FsdGVkX
         }
         $('#Msend').addClass('disabled');
         $('#Msend').html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>');
-       
-        
+
+
                 $.ajax({
-                    url: 'https://pennycoreapi.azurewebsites.net/api/Account/SendEmail',
+                    url: 'http://127.0.0.1:5000/api/sendemail',
                     method: 'POST',
                     dataType: 'json',
-                    headers: { 'Authorization':'bearer '+sessionStorage.Osession },
-                    data: { "emailAdress": "support@pennyinc.co.ke", "subject": Msubject, "emailBody": "Name: " + Mname + " \n " + " Email: " + Memail + " \n " + " Message: " + Mmessage },
+										headers: {
+												'Content-Type': 'application/json',
+												'Authorization':'Bearer ' + sessionStorage.Osession
+										},
+                    data: JSON.stringify({ "emailAddress": "support@pennyinc.co.ke", "subject": Msubject, "emailBody": Mmessage + "\n" + "Sincerely" + "\n" + Mname + "\n" + Memail}),
                     success: function (ResponseBody) {
                         console.log(JSON.stringify(ResponseBody));
                         $('#mail').modal('hide');

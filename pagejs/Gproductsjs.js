@@ -925,7 +925,7 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 		});
 
 		//for the register additional info
-		$('#addInfo').click(function(){
+		$('#addInfo').click(function(event){
 			event.preventDefault();
 
 			var middleName=$('#MName').val();
@@ -1006,6 +1006,18 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 							} else {
 								$("#CP").html("<span class='fa fa-close'></span>");
 								$("#bonusL").html("<span class='fa fa-lock'></span>");
+
+								//AJAX TO VERIFY PHONE NUMBER
+								$.ajax({
+									url:'http://127.0.0.1:5000/api/accontInfo?phonenumber='+ResponseBody.phoneNumber,
+									method:'Get',
+									dataType:'json',
+									processData:false,
+									success:function(ResponseBody){
+										console.log(JSON.stringify(ResponseBody))
+										$('#verifyCode').modal('show');
+									}
+								})
 							}
 
 						},
@@ -1018,7 +1030,34 @@ if ((sessionStorage.getItem('session') === null || sessionStorage.getItem('sessi
 			});
 		});
 
+		//validate code entered
+		$('#codeVIB').click(function(event){
+			event.preventDefault();
 
+			if ($('#codeVI').val() == ''){
+				$('#codeVI').focus();
+			}
+			else{
+				$.ajax({
+					url:'http://127.0.0.1:5000/api/verifyCode',
+					method:'Get',
+					dataType:'json',
+					data:JSON.stringify({ 'code': $('#codeVI').val() }),
+					success:function(Resp){
+						console.log(JSON.stringify(Resp));
+						$('#codeSuccessInd').html("<span class='fa fa-check fa-3x'></span>");
+						setTimeout(function(){$('#verifyCode').modal('hide');},1000);
+					},
+					error:function(error){
+						console.log(JSON.stringify(error));
+						$('#verifyCode').modal('hide');
+
+						$('#errorMSG').html("We are experiencing errors.Please try again later");
+						$('#ErrorM').modal('show');
+					}
+				});
+			}
+		});
 
 	//Acution products Active
 	$("#LiveA").click(function(event){

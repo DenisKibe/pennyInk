@@ -139,7 +139,7 @@ if (locate.match(finds)) {
 		                        complete: function () {
 
 		                            $.ajax({
-		                                url: 'https://pennycoreapi.azurewebsites.net/api/Account/ResetPassword',
+		                                url: 'http://127.0.0.1:5000/api/resetPassword',
 		                                method: 'POST',
 		                                headers: { 'Authorization': outletResponse.token_type + ' ' + outletResponse.access_token },
 		                                dataType: 'json',
